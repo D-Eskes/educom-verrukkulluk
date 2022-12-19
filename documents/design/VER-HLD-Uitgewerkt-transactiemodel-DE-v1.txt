@@ -1,0 +1,145 @@
+title Verrukkulluk
+
+entryspacing 1.3
+==Transactie: Homepagina==
+actor User
+User->Front End: Invoeren URL
+Front End->Back End: Zoek recepten
+
+database Database
+Back End->Database: Haal recepten
+Database->Back End: Ontvang recepten 
+
+Back End->Database: Haal gerichtinfo voor de recepten
+Database->Back End: Ontvang gerechtinfo
+
+Back End->Database: Haal keuken-type voor de recepten
+Database->Back End: Ontvang keuken-type
+
+Back End->Database: Haal ingredienten voor de recepten
+Database->Back End: Ontvang ingredienten
+
+Back End->Database: Haal artikelen voor de ingredienten
+Database->Back End: Ontvang artikelen
+
+Back End->Back End: Berekeningen uitvoeren (gemiddelde rating, recept prijs, etc..)
+
+Back End->Front End: Front End bijwerken
+
+==Transactie: Detailpagina==
+actor User
+User->Front End: Klik op smullen
+Front End->Back End: Zoek recept met recept-id
+
+database Database
+Back End->Database: Haal recept
+Database->Back End: Ontvang recept 
+
+Back End->Database: Haal gerichtinfo voor het recept
+Database->Back End: Ontvang gerechtinfo
+
+Back End->Database: Haal keuken-type voor het recept
+Database->Back End: Ontvang keuken-type
+
+Back End->Database: Haal ingredienten voor het recept
+Database->Back End: Ontvang ingredienten
+
+Back End->Database: Haal artikelen voor de ingredienten
+Database->Back End: Ontvang artikelen
+
+Back End->Back End: Berekeningen uitvoeren
+
+Back End->Front End: Front end bijwerken
+
+==Transactie: Boodschappen Toevoegen==
+actor User
+User->Front End: Klik op toevoegen
+Front End->Back End: Zoek recept met recept-id en voeg artikelen toe aan de boodschappenlijst van de user met user-id
+
+database Database
+Back End->Database: Haal recept
+Database->Back End: Ontvang recept
+
+Back End->Database: Haal ingredienten voor het recept
+Database->Back End: Ontvang ingredienten
+
+Back End->Database: Haal artikelen voor de ingredienten
+Database->Back End: Ontvang artikelen
+
+Back End->Back End: Berekeningen uitvoeren
+
+Back End->Front End: Front end bijwerken
+
+==Transactie: Boodschappen toevoegen==
+actor User
+User->Front End: Klik op toevoegen
+Front End->Back End: Zoek recept met recept-id
+
+database Database
+Back End->Database: Haal recept
+Database->Back End: Ontvang recept
+
+Back End->Database: Haal ingredienten voor het recept
+Database->Back End: Ontvang ingredienten
+
+Back End->Database: Haal artikelen voor de ingredienten
+Database->Back End: Ontvang artikelen
+
+Back End->Back End: Berekeningen uitvoeren (totale prijs, etc..)
+
+Back End->Front End: Front end bijwerken 
+
+==Transactie: Favoriet toevoegen/verwijderen==
+actor User
+User->Front End: Klik op favoriet
+Front End->Back End: Zoek receptinfo met recept-id, user-id en record-type = F
+
+database Database
+Back End->Database: Uitvoeren query
+Database->Back End: Ontvang resultaat
+
+Back End->Back End: Als receptinfo aanwezig, verwijder receptinfo, anders creëer receptinfo 
+
+Back End->Database: Uitvoeren query
+Database->Back End: Ontvang resultaat
+
+Back End->Front End: Front end bijwerken
+
+==Transactie: Rating==
+actor User
+User->Front End: Klik op sterretje
+Front End->Back End: Rate dit recept met recept-id #sterren
+
+database Database
+Back End->Database: Creëer receptinfo met recept-id en record-type = W en numeriekveld = #sterren
+
+Back End->Front End: Front end bijwerken
+
+==Transactie: Favoriet toevoegen/verwijderen==
+actor User
+User->Front End: Klik op favoriet
+Front End->Back End: Zoek receptinfo met recept-id, user-id en record-type = F
+
+database Database
+Back End->Database: Uitvoeren query
+Database->Back End: Ontvang resultaat
+
+Back End->Back End: Als receptinfo aanwezig, verwijder receptinfo, anders creëer receptinfo 
+
+Back End->Database: Uitvoeren query
+Database->Back End: Ontvangen resultaat
+
+Back End->Front End: Front end bijwerken
+
+==Transactie: Zoeken==
+actor User
+User->Front End: Type een zoekaanvraag
+Front End->Back End: Zoek in de verschillende tabellen naar overeenkomende waarden
+
+database Database
+Back End->Database: Uitvoeren query
+Database->Back End: Ontvang resultaat
+
+Back End->Front End: Front end bijwerken
+
+
