@@ -6,6 +6,8 @@ define("PASSWORD", "");
 define("DATABASE", "verrukkulluk");
 define("HOST", "localhost");
 
+
+
 class database {
 
     private $connection;
@@ -14,7 +16,7 @@ class database {
        $this->connection = mysqli_connect(HOST,                                          
                                          USER, 
                                          PASSWORD,
-                                         DATABASE );
+                                         DATABASE) or die("Database Error");
     }
 
     public function getConnection() {
@@ -22,3 +24,5 @@ class database {
     }
 
 }
+
+?>

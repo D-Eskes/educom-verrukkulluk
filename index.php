@@ -13,3 +13,5 @@ $data = $art->selecteerArtikel(8);
 
 /// RETURN
 var_dump($data);
+
+?>
