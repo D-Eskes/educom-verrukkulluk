@@ -1,0 +1,20 @@
+
+ERD
+======================
+recept-ingredient relatie -> ingredient
+ingredient -> artikel
+
+rating kan anoniem
+
+type en keuken kun eigen tabel krijgen (samenvoegen met record-type)
+
+recept-user aangespast worden
+
+rating = anoniem
+======================
+
+
+ASD
+======================
+
+======================
