@@ -10,7 +10,7 @@ define("HOST", "localhost");
 
 
 
-class database {
+class Database {
 
     private $connection;
 
