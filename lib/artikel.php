@@ -1,13 +1,8 @@
 <?php
 
-function debug($data) {
-    echo "<pre>";
-    var_dump($data);
-}
+require_once("debug.php");
 
-
-
-class artikel {
+class Artikel {
 
     private $connection;
 
@@ -17,7 +12,7 @@ class artikel {
   
     public function selecteerArtikel($artikel_id) {
 
-        $sql = "SELECT * FROM artikel WHERE id = $artikel_id";
+        $sql = "SELECT * FROM Artikel WHERE id = $artikel_id";
         
         $result = mysqli_query($this->connection, $sql);
         $artikel = mysqli_fetch_array($result, MYSQLI_ASSOC);

@@ -1,5 +1,7 @@
 <?php
 
+require_once("lib/debug.php");
+
 require_once("lib/database.php");
 require_once("lib/artikel.php");
 
@@ -9,9 +11,8 @@ $art = new artikel($db->getConnection());
 
 
 /// VERWERK 
-$data = $art->selecteerArtikel(8);
+$data = debuginfo($art->selecteerArtikel(3));
 
-/// RETURN
-var_dump($data);
+
 
 ?>
