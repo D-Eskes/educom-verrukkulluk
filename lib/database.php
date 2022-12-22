@@ -15,10 +15,7 @@ class Database {
     private $connection;
 
     public function __construct() {
-       $this->connection = mysqli_connect(HOST,                                          
-                                         USER, 
-                                         PASSWORD,
-                                         DATABASE) or die(mysql_error());
+        $this->connection = mysqli_connect(HOST, USER, PASSWORD, DATABASE) or die(mysql_error());
     }
 
     public function getConnection() {

@@ -6,6 +6,7 @@ require_once("debug.php");
 Class Ingredient {
 
     private $connection;
+    private $article;
 
     public function __construct($connection, $article) {
         $this->connection = $connection;
@@ -18,7 +19,7 @@ Class Ingredient {
 
         $result = [];
         while ($row = mysqli_fetch_array($sql_result, MYSQLI_ASSOC)) {
-            $result[] = array_merge($this->selectArticle($row["article_id"], $row));
+            $result[] = $row + $this->selectArticle($row["article_id"]);
         }
         return $result;
     }

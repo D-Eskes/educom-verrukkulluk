@@ -16,8 +16,7 @@ $article = new Article($db->getConnection());
 $user = new User($db->getConnection());
 $kitchen_type = new KitchenType($db->getConnection());
 $ingredient = new Ingredient($db->getConnection(), $article);
-
-$recipe_info = new RecipeInfo($db->getConnection());
+$recipe_info = new RecipeInfo($db->getConnection(), $user);
 
 
 /// VERWERK
@@ -29,12 +28,10 @@ echo "KitchenType";
 debuginfo($kitchen_type->selectKitchenType(1));
 echo "Ingredient";
 debuginfo($ingredient->selectIngredient(1));
-
-echo "ReceptInfo";
+echo "RecipeInfo";
 debuginfo($recipe_info->selectRecipeInfo(1));
 
 
 
-// debuginfo($recipeInfo->addFavorite(2, 1))
 
 ?>
