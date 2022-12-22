@@ -8,31 +8,39 @@ require_once("lib/user.php");
 require_once("lib/kitchen_type.php");
 require_once("lib/ingredient.php");
 require_once("lib/recipe_info.php");
-
 require_once("lib/recipe.php");
+
+require_once("lib/grocery.php");
+
 
 /// INIT
 $db = new Database();
 $article = new Article($db->getConnection());
-$user = new User($db->getConnection());
+$grocery = new Grocery($db->getConnection(), $article);
+$user = new User($db->getConnection(), $grocery);
 $kitchen_type = new KitchenType($db->getConnection());
 $ingredient = new Ingredient($db->getConnection(), $article);
 $recipe_info = new RecipeInfo($db->getConnection(), $user);
 $recipe = new Recipe($db->getConnection(), $kitchen_type, $user, $ingredient, $recipe_info);
 
+
 /// VERWERK
-// echo "Article";
-// debuginfo($article->selectArticle(1));
-// echo "User";
-// debuginfo($user->selectUser(1));
-// echo "KitchenType";
-// debuginfo($kitchen_type->selectKitchenType(1));
-// echo "Ingredient";
-// debuginfo($ingredient->selectIngredient(1));
-// echo "RecipeInfo";
-// debuginfo($recipe_info->selectRecipeInfo(1));
-echo "Recipe";
+echo "<h3> Article </h3>";
+debuginfo($article->selectArticle(1));
+echo "<h3> Grocery </h3>";
+debuginfo($grocery->selectGrocery(1));
+echo "<h3> User </h3>";
+debuginfo($user->selectUser(1));
+echo "<h3> KitchenType </h3>";
+debuginfo($kitchen_type->selectKitchenType(1));
+echo "<h3> Ingredient </h3>";
+debuginfo($ingredient->selectIngredient(1));
+echo "<h3> RecipeInfo </h3>";
+debuginfo($recipe_info->selectRecipeInfo(1));
+echo "<h3> Recipe </h3>";
 debuginfo($recipe->selectRecipeMultiple([1]));
+
+
 
 
 

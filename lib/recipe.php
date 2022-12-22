@@ -139,11 +139,11 @@ Class Recipe {
 
         $result = 0;
         foreach ($ingredient_array as $ingredient) {
-            $amount = $ingredient["amount"];
+            $quantity_used = $ingredient["quantity_used"];
             $quantity = $ingredient["quantity"];
             $calories = $ingredient["calories"];
 
-            $result += round($calories * ($amount / $quantity));
+            $result += round($calories * ($quantity_used / $quantity));
         }
         return $result;
     }
@@ -154,11 +154,11 @@ Class Recipe {
 
         $result = 0;
         foreach ($ingredient_array as $ingredient) {
-            $amount = $ingredient["amount"];
+            $quantity_used = $ingredient["quantity_used"];
             $quantity = $ingredient["quantity"];
             $price = $ingredient["price"];
 
-            $result += round($price * ($amount / $quantity));
+            $result += round($price * ($quantity_used / $quantity));
         }
         return $result;
     }
