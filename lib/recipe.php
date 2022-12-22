@@ -28,7 +28,6 @@ Class Recipe {
         $result["type"] = $this->retrieveType($result["type_id"]);
 
         $result["user"] = $this->retrieveUser($result["user_id"]);
-        
         $result["ingredient"] = $this->retrieveIngredient($result["id"]);
 
         $result["preparation"] = $this->retrievePreparation($result["id"]);
@@ -37,9 +36,9 @@ Class Recipe {
         $result["favorite"] = $this->retrieveFavorite($result["id"]);
 
         // derived
-        $result["rating_average"] = $this->calculateAverageRating($result["rating"]);
-        $result["calories_total"] = $this->calculateTotalCalories($result["ingredient"]);
-        $result["price_total"] = $this->calculateTotalPrice($result["ingredient"]);
+        $result["rating_average"] = $this->calculateAverageRating($result["id"]);
+        $result["calories_total"] = $this->calculateTotalCalories($result["id"]);
+        $result["price_total"] = $this->calculateTotalPrice($result["id"]);
 
         return $result;
     }
@@ -62,7 +61,7 @@ Class Recipe {
     private function retrieveUser($user_id) {
         return $this->user->selectUser($user_id);
     }
-
+    
     private function retrieveIngredient($recipe_id) {
         return $this->ingredient->selectIngredient($recipe_id);
     }
@@ -108,8 +107,10 @@ Class Recipe {
         return $result;
     }
 
-    private function calculateAverageRating($rating_array) {
+    private function calculateAverageRating($recipe_id) {
         // return the average rating of a recipe up to two decimals, returns zero if no ratings are given for the recipe
+        
+        $rating_array = $this->retrieveRating($recipe_id);
         $rating_entries = count($rating_array);
         $rating_total = 0;
 
@@ -124,8 +125,10 @@ Class Recipe {
         }
         return round($result, 2);
     }
-    private function calculateTotalCalories($ingredient_array) {
+    private function calculateTotalCalories($recipe_id) {
         // return the total calories (not kilocalories -> /1000) of the recipe (rounded up)
+
+        $ingredient_array = $this->retrieveIngredient($recipe_id);
 
         $result = 0;
         foreach ($ingredient_array as $ingredient) {
@@ -137,8 +140,10 @@ Class Recipe {
         }
         return $result;
     }
-    private function calculateTotalPrice($ingredient_array) {
+    private function calculateTotalPrice($recipe_id) {
         // return the total price of the recipe in cents (rounded up)
+
+        $ingredient_array = $this->retrieveIngredient($recipe_id);
 
         $result = 0;
         foreach ($ingredient_array as $ingredient) {

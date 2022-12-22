@@ -32,7 +32,7 @@ $recipe = new Recipe($db->getConnection(), $kitchen_type, $user, $ingredient, $r
 // echo "RecipeInfo";
 // debuginfo($recipe_info->selectRecipeInfo(1));
 echo "Recipe";
-debuginfo($recipe->selectRecipe(2));
+debuginfo($recipe->selectRecipe(4));
 
 
 
