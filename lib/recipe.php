@@ -42,6 +42,13 @@ Class Recipe {
 
         return $result;
     }
+    public function selectRecipeMultiple($recipe_ids) {
+        $result = [];
+        foreach ($recipe_ids as $recipe_id) {
+            $result[] = $this->selectRecipe($recipe_id);
+        }
+        return $result;
+    }
 
     private function retrieveKitchen($kitchen_id) {
         $result = $this->kitchen_type->selectKitchenType($kitchen_id);
@@ -155,6 +162,22 @@ Class Recipe {
         }
         return $result;
     }
+    
+    // private function calculateTotalPriceArticles($recipe_id) {
+    //     // return the total price of the recipe in cents (rounded up)
+
+    //     $ingredient_array = $this->retrieveIngredient($recipe_id);
+
+    //     $result = 0;
+    //     foreach ($ingredient_array as $ingredient) {
+    //         $amount = $ingredient["amount"];
+    //         $quantity = $ingredient["quantity"];
+    //         $price = $ingredient["price"];
+
+    //         $result += $price * ceil($amount / $quantity);
+    //     }
+    //     return $result;
+    // }
 }
     
 
