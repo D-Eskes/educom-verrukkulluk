@@ -40,6 +40,9 @@ debuginfo($recipe_info->selectRecipeInfo(1));
 echo "<h3> Recipe </h3>";
 debuginfo($recipe->selectRecipeMultiple([1]));
 
+// echo "<h3> Add Grocery </h3>";
+// $grocery->addGrocery(1, 3);
+
 
 
 
