@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2022 at 04:19 PM
+-- Generation Time: Dec 22, 2022 at 02:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -53,6 +53,29 @@ INSERT INTO `article` (`id`, `name`, `description`, `price`, `unit`, `quantity`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `grocery`
+--
+
+CREATE TABLE `grocery` (
+  `id` int(12) NOT NULL,
+  `user_id` int(12) DEFAULT NULL,
+  `article_id` int(12) DEFAULT NULL,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
+  `amount` int(12) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `grocery`
+--
+
+INSERT INTO `grocery` (`id`, `user_id`, `article_id`, `date_added`, `amount`) VALUES
+(1, 1, 1, '2022-12-22 10:37:20', 14),
+(2, 1, 5, '2022-12-22 10:37:20', 3),
+(6, 1, 3, '2022-12-22 13:22:15', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ingredient`
 --
 
@@ -60,14 +83,14 @@ CREATE TABLE `ingredient` (
   `id` int(12) NOT NULL,
   `recipe_id` int(12) DEFAULT NULL,
   `article_id` int(12) DEFAULT NULL,
-  `amount` int(12) DEFAULT NULL
+  `quantity_used` int(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ingredient`
 --
 
-INSERT INTO `ingredient` (`id`, `recipe_id`, `article_id`, `amount`) VALUES
+INSERT INTO `ingredient` (`id`, `recipe_id`, `article_id`, `quantity_used`) VALUES
 (1, 1, 2, 4),
 (2, 1, 3, 4),
 (3, 1, 4, 100),
@@ -163,7 +186,6 @@ INSERT INTO `recipe_info` (`id`, `record_type`, `recipe_id`, `user_id`, `date`, 
 (4, 'C', 1, 1, '2022-12-21 09:12:32', NULL, 'Lekkerste hamburger ooit gegeten!'),
 (5, 'R', 1, NULL, '2022-12-21 09:16:26', 4, NULL),
 (6, 'R', 1, NULL, '2022-12-21 09:16:26', 5, NULL),
-(7, 'F', 1, 1, '2022-12-21 09:17:59', NULL, NULL),
 (8, 'P', 3, NULL, '2022-12-20 23:00:00', 1, 'Bak de kipburgers'),
 (9, 'P', 3, NULL, '2022-12-20 23:00:00', 2, 'Snij de broodjes en plaats de kipburgers op de broodjes'),
 (10, 'P', 3, NULL, '2022-12-20 23:00:00', 3, 'Doe een schepje mayonaise op elk broodje en klaar is Kees'),
@@ -178,7 +200,8 @@ INSERT INTO `recipe_info` (`id`, `record_type`, `recipe_id`, `user_id`, `date`, 
 (19, 'C', 4, 1, '2022-12-21 09:12:32', NULL, 'Die flinke klodder mayonaise maakte het nog enigszins te eten...'),
 (20, 'R', 4, NULL, '2022-12-21 09:16:26', 2, NULL),
 (21, 'R', 4, NULL, '2022-12-21 09:16:26', 3, NULL),
-(22, 'F', 2, 1, '2022-12-21 12:43:55', NULL, NULL);
+(22, 'F', 2, 1, '2022-12-21 12:43:55', NULL, NULL),
+(36, 'F', 1, 1, '2022-12-21 16:51:05', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -210,6 +233,14 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `picture`) VALUES
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `grocery`
+--
+ALTER TABLE `grocery`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shopping_ingredient_ibfk_1` (`article_id`),
+  ADD KEY `shopping_ingredient_ibfk_2` (`user_id`);
 
 --
 -- Indexes for table `ingredient`
@@ -258,6 +289,12 @@ ALTER TABLE `article`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `grocery`
+--
+ALTER TABLE `grocery`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `ingredient`
 --
 ALTER TABLE `ingredient`
@@ -279,7 +316,7 @@ ALTER TABLE `recipe`
 -- AUTO_INCREMENT for table `recipe_info`
 --
 ALTER TABLE `recipe_info`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -290,6 +327,13 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `grocery`
+--
+ALTER TABLE `grocery`
+  ADD CONSTRAINT `shopping_ingredient_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+  ADD CONSTRAINT `shopping_ingredient_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `ingredient`
