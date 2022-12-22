@@ -20,13 +20,13 @@ Class RecipeInfo{
         $result = [];
         while ($row = mysqli_fetch_array($sql_result, MYSQLI_ASSOC)) {
             if (in_array($row["record_type"], ["C", "F"])) {
-                $row["user"] = $this->selectUser($row["user_id"]);
+                $row["user"] = $this->retrieveUser($row["user_id"]);
             }
             $result[] = $row;
         }
         return $result;
     }
-    private function selectUser($user_id) {
+    private function retrieveUser($user_id) {
         return $this->user->selectUser($user_id);
     }
 

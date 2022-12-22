@@ -19,12 +19,12 @@ Class Ingredient {
 
         $result = [];
         while ($row = mysqli_fetch_array($sql_result, MYSQLI_ASSOC)) {
-            $result[] = $row + $this->selectArticle($row["article_id"]);
+            $result[] = $row + $this->retrieveArticle($row["article_id"]);
         }
         return $result;
     }
     
-    private function selectArticle($article_id) {
+    private function retrieveArticle($article_id) {
         return $this->article->selectArticle($article_id);
     }
 
