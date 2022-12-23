@@ -8,6 +8,8 @@ Class Grocery {
     private $connection;
     private $article;
 
+    private $ingredient;
+
     public function __construct($connection, $article) {
         $this->connection = $connection;
         $this->article = $article;
@@ -28,7 +30,23 @@ Class Grocery {
         return $this->article->selectArticle($article_id);
     }
 
+    public function addFunctionality($ingredient) {
+        $this->ingredient = $ingredient;
+    }
 
+    
+    private function amountGrocery($user_id, $article_id) {
+        $sql = "SELECT * FROM grocery WHERE user_id = $user_id and article_id = $article_id";
+        $sql_result = mysqli_query($this->connection, $sql);
+    
+        $result = mysqli_fetch_array($sql_result, MYSQLI_ASSOC);
+    
+        $amount = 0;
+        if ($result !== null) {
+            $amount = $result["amount"];
+        }
+        return $amount;
+    }
     public function addGrocery($user_id, $article_id, $amount_add = 1) {
         if ($amount_add < 1) {
             return;
@@ -55,18 +73,16 @@ Class Grocery {
         
         mysqli_query($this->connection, $sql);
     }
-    private function amountGrocery($user_id, $article_id) {
-        $sql = "SELECT * FROM grocery WHERE user_id = $user_id and article_id = $article_id";
-        $sql_result = mysqli_query($this->connection, $sql);
-    
-        $result = mysqli_fetch_array($sql_result, MYSQLI_ASSOC);
-    
-        $amount = 0;
-        if ($result !== null) {
-            $amount = $result["amount"];
+    public function addGroceryRecipe($user_id, $recipe_id) {
+        $ingredients = $this->ingredient->selectIngredient($recipe_id);
+        foreach ($ingredients as $ingredient) {
+            $article_id = $ingredient["article_id"];
+            $amount = ceil($ingredient["quantity_used"] / $ingredient["quantity"]);
+            $this->addGrocery($user_id, $article_id, $amount);
         }
-        return $amount;
+
     }
+    
     
 }
 
