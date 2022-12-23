@@ -1,51 +1,55 @@
 <?php
+//// Allereerst zorgen dat de "Autoloader" uit vendor opgenomen wordt:
+require_once("./vendor/autoload.php");
 
-require_once("lib/debug.php");
+/// Twig koppelen:
+$loader = new \Twig\Loader\FilesystemLoader("./templates");
+/// VOOR PRODUCTIE:
+/// $twig = new \Twig\Environment($loader), ["cache" => "./cache/cc"]);
 
-require_once("lib/database.php");
-require_once("lib/article.php");
-require_once("lib/user.php");
-require_once("lib/kitchen_type.php");
-require_once("lib/ingredient.php");
-require_once("lib/recipe_info.php");
-require_once("lib/recipe.php");
+/// VOOR DEVELOPMENT:
+$twig = new \Twig\Environment($loader, ["debug" => true ]);
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 
-require_once("lib/grocery.php");
+/******************************/
 
-
-/// INIT
-$db = new Database();
-$article = new Article($db->getConnection());
-$grocery = new Grocery($db->getConnection(), $article);
-$user = new User($db->getConnection(), $grocery);
-$kitchen_type = new KitchenType($db->getConnection());
-$ingredient = new Ingredient($db->getConnection(), $article);
-$recipe_info = new RecipeInfo($db->getConnection(), $user);
-$recipe = new Recipe($db->getConnection(), $kitchen_type, $user, $ingredient, $recipe_info);
+/// Next step, iets met je data doen. Ophalen of zo
+require_once("lib/gerecht.php");
+$gerecht = new gerecht();
+$data = $gerecht->selecteerGerecht();
 
 
-/// VERWERK
-echo "<h3> Article </h3>";
-debuginfo($article->selectArticle(1));
-echo "<h3> Grocery </h3>";
-debuginfo($grocery->selectGrocery(1));
-echo "<h3> User </h3>";
-debuginfo($user->selectUser(1));
-echo "<h3> KitchenType </h3>";
-debuginfo($kitchen_type->selectKitchenType(1));
-echo "<h3> Ingredient </h3>";
-debuginfo($ingredient->selectIngredient(1));
-echo "<h3> RecipeInfo </h3>";
-debuginfo($recipe_info->selectRecipeInfo(1));
-echo "<h3> Recipe </h3>";
-debuginfo($recipe->selectRecipeMultiple([1]));
+/*
+URL:
+http://localhost/index.php?gerecht_id=4&action=detail
+*/
 
-// echo "<h3> Add Grocery </h3>";
-// $grocery->addGrocery(1, 3);
+$gerecht_id = isset($_GET["gerecht_id"]) ? $_GET["gerecht_id"] : "";
+$action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
+
+switch($action) {
+
+    case "homepage": {
+        $data = $gerecht->selecteerGerecht();
+        $template = 'homepage.html.twig';
+        $title = "homepage";
+        break;
+    }
+    case "detail": {
+        $data = $gerecht->selecteerGerecht($gerecht_id);
+        $template = 'detail.html.twig';
+        $title = "detail pagina";
+        break;
+    }
+}
 
 
+/// Onderstaande code schrijf je idealiter in een layout klasse of iets dergelijks
+/// Juiste template laden, in dit geval "homepage"
+$template = $twig->load($template);
 
 
+/// En tonen die handel!
+// require_once("lib/debug.php");
+echo $template->render(["title" => $title, "data" => $data]);
 
-
-?>

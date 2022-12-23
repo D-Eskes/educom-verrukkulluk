@@ -70,25 +70,6 @@ Back End->Back End: Berekeningen uitvoeren
 
 Back End->Front End: Front end bijwerken
 
-==Transactie: Boodschappen toevoegen==
-actor User
-User->Front End: Klik op toevoegen
-Front End->Back End: Zoek recept met recept-id
-
-database Database
-Back End->Database: Haal recept
-Database->Back End: Ontvang recept
-
-Back End->Database: Haal ingredienten voor het recept
-Database->Back End: Ontvang ingredienten
-
-Back End->Database: Haal artikelen voor de ingredienten
-Database->Back End: Ontvang artikelen
-
-Back End->Back End: Berekeningen uitvoeren (totale prijs, etc..)
-
-Back End->Front End: Front end bijwerken 
-
 ==Transactie: Favoriet toevoegen/verwijderen==
 actor User
 User->Front End: Klik op favoriet

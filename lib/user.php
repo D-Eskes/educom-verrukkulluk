@@ -25,6 +25,7 @@ Class User {
     private function retrieveGrocery($user_id) {
         return $this->grocery->selectGrocery($user_id);
     }
+
 }
 
 ?>
