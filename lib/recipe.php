@@ -42,10 +42,14 @@ Class Recipe {
 
         return $result;
     }
-    public function selectRecipeMultiple($recipe_ids) {
+    public function selectRecipeAll() {
+
+        $sql = "SELECT * FROM recipe";
+        $sql_result = mysqli_query($this->connection, $sql);
+
         $result = [];
-        foreach ($recipe_ids as $recipe_id) {
-            $result[] = $this->selectRecipe($recipe_id);
+        while ($row = mysqli_fetch_array($sql_result, MYSQLI_ASSOC)) {
+            $result[] = $this->selectRecipe($row["id"]);
         }
         return $result;
     }

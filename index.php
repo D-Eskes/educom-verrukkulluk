@@ -12,44 +12,62 @@ $twig = new \Twig\Environment($loader, ["debug" => true ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 /******************************/
+require_once("lib/debug.php");
+require_once("lib/request.php");
 
-/// Next step, iets met je data doen. Ophalen of zo
-require_once("lib/gerecht.php");
-$gerecht = new gerecht();
-$data = $gerecht->selecteerGerecht();
+require_once("lib/database.php");
+require_once("lib/article.php");
+require_once("lib/grocery.php");
+require_once("lib/user.php");
+require_once("lib/kitchen_type.php");
+require_once("lib/ingredient.php");
+require_once("lib/recipe_info.php");
+require_once("lib/recipe.php");
 
 
-/*
-URL:
-http://localhost/index.php?gerecht_id=4&action=detail
-*/
+/// INIT
+$db = new Database();
+$article = new Article($db->getConnection());
+$grocery = new Grocery($db->getConnection(), $article);
+$ingredient = new Ingredient($db->getConnection(), $article);
+$user = new User($db->getConnection(), $grocery);
+$kitchen_type = new KitchenType($db->getConnection());
+$recipe_info = new RecipeInfo($db->getConnection(), $user);
+$recipe = new Recipe($db->getConnection(), $kitchen_type, $user, $ingredient, $recipe_info);
 
-$gerecht_id = isset($_GET["gerecht_id"]) ? $_GET["gerecht_id"] : "";
-$action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
+$grocery->addFunctionality($ingredient);
+
+
+// UPDATE
+
+$action = defaultGET("action", "homepage");
+// debuginfo($action);
 
 switch($action) {
 
     case "homepage": {
-        $data = $gerecht->selecteerGerecht();
         $template = 'homepage.html.twig';
-        $title = "homepage";
+
+        $title = "Home";
+        $data = $recipe->selectRecipeAll();
         break;
     }
     case "detail": {
-        $data = $gerecht->selecteerGerecht($gerecht_id);
         $template = 'detail.html.twig';
-        $title = "detail pagina";
+
+        $title = "Details";
+
         break;
     }
 }
 
 
-/// Onderstaande code schrijf je idealiter in een layout klasse of iets dergelijks
-/// Juiste template laden, in dit geval "homepage"
 $template = $twig->load($template);
 
 
-/// En tonen die handel!
-// require_once("lib/debug.php");
-echo $template->render(["title" => $title, "data" => $data]);
+
+echo $template->render([
+    "title" => $title, 
+    "data" => $data
+]);
 

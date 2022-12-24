@@ -1,52 +1,74 @@
 <html lang="nl">
-<head>
+    <head>
+        <title> Verrukkuluk::{{title}} </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <title>het is verrukkuluk! :: {{ title }} </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/fonts.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css" />
 
-    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/fonts.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+        <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
+        <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
 
-    <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
-    <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                {# Start Header #}
+                    <div class="header">
+                        {% block header %}
+                        {% endblock %}   
+                    </div>
+                {# End Header #}
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-4" style="background-color: #F0F;">
+                    <div class="pl-lg-4 pr-lg-4">
+                    {# Start Agenda #}
+                        <div class="agenda">
+                            <h2> Agenda </h2>
+                        </div>
+                    {# End Agenda #}
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 order-lg-3" style="background-color: #F8F;">
+                    <div class="pl-lg-4 pr-lg-4">
+                    {# Start Login #}
+                        <div class="login">
+                            <h2> Login </h2>
+                        </div>
+                    {# End Login #}
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-lg-8 order-lg-2" style="background-color: #FBF;">
+                    <div class="pl-lg-4 pr-lg-4">
+                    {# Start Content #}
+                        <div class="content">
+                            <h2> Content </h2>
+                            {%  block content %}
+                            {%  endblock %}
+                        </div>
+                    {# End Content #}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                {# Start Footer #}
+                    <div class="footer">
+                    <h1> Footer </h1>
+                    </div>
+                {# End Footer #}
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
-<body>
-<div class="container-fluid">
-
-    <div class="row">
-        <div class="col-md-12">
-        {% block header %}
-        {% endblock %}   
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <h2>Agenda</h2>
-            <i class="fa fa-calendar"></i> FontAwesome <a href="https://fontawesome.com/icons?d=gallery&m=free">Documentation</a><br>
-            <i class="fa fa-file-pdf"></i><a href="https://www.layoutit.com/build">Layout-it</a>
-
-
-        </div>
-        <div class="col-md-9">
-            <h2>Content</h2>
-            {%  block content %}
-            {%  endblock %}
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Footer</h1>
-        </div>
-    </div>
-
-
-</div>
-
-</body>

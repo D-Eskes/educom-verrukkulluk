@@ -2,7 +2,6 @@
  VERRUKKULLUK MAIN.CSS
  */
 
-
 :root {
 
     /* FONTS */
@@ -29,6 +28,8 @@
 
 }
 
+
+
 /** HEADING **/
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading) !important;
@@ -47,8 +48,48 @@ h3, h4, h5 {
 }
 
 
+
 /** HTML / BODY **/
 html, body {
     font-family: "Helvetica Neue", Arial, SansSerif;
     font-size: 16px;
+}
+
+
+
+/* OWN CHANGES */
+
+.row {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* HEADER */
+.header {
+    background-color: yellow;
+}
+
+/* AGENDA */
+.agenda {
+    background-color: green;
+    text-align: center;
+}
+
+/* LOGIN */
+.login {
+    background-color: red;
+    text-align: center;
+}
+
+/* CONTENT */
+.content {
+    background-color: blue;
+    text-align: center
+}
+
+/* FOOTER */
+.footer {
+    background-color: purple;
 }
