@@ -6,15 +6,18 @@
         <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/fonts.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css" />
+        <link rel="stylesheet" type="text/css" href="assets/vegas/vegas.css" /> 
 
         <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 
         <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
         <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" language="javascript" src="assets/vegas/vegas.js"></script>
 
-        <style>
+        <script>
+
             
-        </style>
+        </script>
     </head>
     <body>
         <div class="container-fluid">
@@ -22,33 +25,67 @@
                 <div class="col-12">
                 {# Start Header #}
                     <div class="header">
-                        {% block header %}
-                        {% endblock %}   
+
+                        <img src="assets/img/logo-v2.png">
+
+                        <div class="tools">
+                            <div class="search">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <input type="text" placeholder="Zoeken">
+                            </div>
+
+                            <div class="menu">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                        </div>
+            
+                        {%  block header %}
+                        {%  endblock %}
                     </div>
                 {# End Header #}
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-12 col-sm-6 col-lg-4" style="background-color: #F0F;">
-                    <div class="pl-lg-4 pr-lg-4">
-                    {# Start Agenda #}
-                        <div class="agenda">
-                            <h2> Agenda </h2>
+                <div class="col-12 col-lg-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-lg-12" style="background-color: #F0F;">
+                            <div class="pl-lg-4 pr-lg-4">
+                            {# Start Agenda #}
+                                <div class="agenda">
+                                    <h2> Agenda </h2>
+                                    <ul class="fa-ul">
+                                        {% for i in range(1, 5) %}
+                                            <li>
+                                                <div class="fa-li">
+                                                    <i class="fa fa-calendar fa-2x"></i>
+                                                </div>
+
+                                                <div class="agenda-text">
+                                                    <h3> Vegetarisch Koken </h3>
+                                                    <p> Een workshop vegetarisch koken, onder leading van Trientje Hupsakee. </p>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {# End Agenda #}
+                            </div>
                         </div>
-                    {# End Agenda #}
+                        <div class="col-12 col-sm-6 col-lg-12" style="background-color: #F8F;">
+                            <div class="pl-lg-4 pr-lg-4">
+                            {# Start Login #}
+                                <div class="login">
+                                    <h2> Login </h2>
+                                </div>
+                            {# End Login #}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-4 order-lg-3" style="background-color: #F8F;">
-                    <div class="pl-lg-4 pr-lg-4">
-                    {# Start Login #}
-                        <div class="login">
-                            <h2> Login </h2>
-                        </div>
-                    {# End Login #}
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-lg-8 order-lg-2" style="background-color: #FBF;">
+                <div class="col-12 col-sm-12 col-lg-8" style="background-color: #FBF;">
                     <div class="pl-lg-4 pr-lg-4">
                     {# Start Content #}
                         <div class="content">
@@ -64,7 +101,27 @@
                 <div class="col-12">
                 {# Start Footer #}
                     <div class="footer">
-                    <h1> Footer </h1>
+
+                        
+                        {# Start Footer Logo #}
+                            <div class="contact">   
+                                <img src="assets/img/verrukkulluk-pay-off.png"/>
+                            </div>
+                        {# End Footer Logo #}
+                        
+                    
+                        {# Start Contact #}
+                            <div class="contact">
+                                <img src="assets/img/verrukkulluk-contact.png"/>
+                                <ul>
+                                    <li> Verrukkuluk </li>
+                                    <li> Poststraat 2b </li>
+                                    <li> Sittard </li>
+                                    <li> info@verrukkulluk.nl </li>
+                                </ul>
+                            </div>
+                        {# End Contact #}
+          
                     </div>
                 {# End Footer #}
                 </div>

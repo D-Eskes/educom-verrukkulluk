@@ -2,25 +2,21 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<img src="assets/img/logo-v2.png"/>
 {% endblock %}
 
 
 {% block content %}
     
-    {# <ul>
-    {% for record in data %}
-        <li>
-            <img src="{{ record.foto }}" style="width: 100px; heigfht: 100px;">
-            
-            {{record.title}}
-          
-        </li>
-    {% endfor %}
-    <ul> #}
+    <div class="row">
+        {% for record in data %}
+            <div class="col-12 col-lg-6">
+                <div class="meal">
+                    <img src="{{record.picture}}" style="height: 100px;">
+                    <b> {{record.title}} </b>
 
-    {# <pre>
-    {{ dump(data) }}
-    </pre> #}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

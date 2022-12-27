@@ -26,6 +26,8 @@
     --white: #FFF;
     --black: #000;
 
+    --search-bar-color: var(--darker-orange)
+
 }
 
 
@@ -59,16 +61,79 @@ html, body {
 
 /* OWN CHANGES */
 
-.row {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
 /* HEADER */
 .header {
+    width: 100%;
+    background: url("");
+    background-position: center center;
+    background-repeat: no-repeat;
     background-color: yellow;
+    aspect-ratio: 3;
+}
+
+.header img {
+    min-width: 200px;
+    max-width: 30%;
+
+    position: absolute;
+    top: 2%;
+    left: 3%;
+}
+
+.header .tools {
+    display: inline-flex;
+    position: absolute;
+    top: 7%;
+    right: 3%;
+}
+
+.header .search {
+    display: inline-flex;
+    width: 300px;
+    max-width: 35vw;
+
+}
+
+.header .search input {
+    width: 100%;
+    border: 3px solid var(--search-bar-color);
+    border-left: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 0px 10px 10px 0px;
+    outline: none;
+}
+
+.header .search button {
+    width: 40px;
+    height: 36px;
+    border: 1px solid var(--search-bar-color);
+    background: var(--search-bar-color);
+    text-align: center;
+    color: #FFF;
+    border-radius: 10px 0px 0px 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.header .menu {
+    transition: all 0.4s ease;
+    cursor: pointer;
+    padding: 0px;
+    margin-left: 5px;
+}
+
+.header .menu:hover {
+    background-color: red;
+}
+
+.header .menu i {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 36px;
+    color: #000;
+
 }
 
 /* AGENDA */
@@ -76,6 +141,32 @@ html, body {
     background-color: green;
     text-align: center;
 }
+
+.agenda ul {
+    /* list-style-type: none; */
+    margin: 0px;
+    padding: 0px;
+}
+
+.agenda li {
+    background-color: blue;
+    text-align: left;
+    margin-left: 60px;
+    margin-right: 20px;
+}
+
+.agenda li .agenda-text{
+    display: block;
+    background-color: red;
+    margin-left: 10px;
+}
+
+
+/* .agenda i {
+    background-color: yellow;
+    float: left;
+} */
+
 
 /* LOGIN */
 .login {
@@ -89,7 +180,36 @@ html, body {
     text-align: center
 }
 
+.meal {
+    text-align: left;
+}
+
 /* FOOTER */
 .footer {
+    display: inline-block;
     background-color: purple;
+
 }
+
+.footer .logo {
+    display: inline-block;
+    background-color: blue;
+}
+
+/* .footer .logo img {
+    max-width: 10%;
+} */
+
+.footer .contact {
+    display: inline-block;
+    background-color: red;
+}
+
+.footer .contact img {
+    min-width: 160px;
+    max-width: 20%;
+}
+
+/* .footer .contact ul {
+    list-style: none;
+} */
