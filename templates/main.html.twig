@@ -16,8 +16,41 @@
 
         <script>
 
+            function openDropdown() {
+                $('.header .menu').removeClass("menu-up")
+                $('.header .menu').addClass("menu-down")
+                dropdown_open = true
+            }
+
+            function closeDropdown() {
+                $('.header .menu').removeClass("menu-down")
+                $('.header .menu').addClass("menu-up")
+            }
+
+            let dropdown_hovering = false
+
+            $(document).ready( function() {
+
+                $('.menu').hover(function() {
+                    dropdown_hovering = true
+                }, function() {
+                    dropdown_hovering = false
+                });
+      
+                $("body").mouseup(function(){
+                    if (!dropdown_hovering) {
+                        closeDropdown()
+                    }
+                });
+                
+                $(".menu-button").click(function() {
+                    openDropdown()
+                }) 
+   
+            });    
             
         </script>
+
     </head>
     <body>
         <div class="container-fluid">
@@ -26,7 +59,12 @@
                 {# Start Header #}
                     <div class="header">
 
-                        <img src="assets/img/logo-v2.png">
+                        {%  block header %}
+                        {%  endblock %}
+
+                        <div class="logo">
+                            <img src="assets/img/verrukkulluk-logo-white.png">
+                        </div>
 
                         <div class="tools">
                             <div class="search">
@@ -36,36 +74,41 @@
                                 <input type="text" placeholder="Zoeken">
                             </div>
 
-                            <div class="menu">
+                            <div class="menu-button">
                                 <i class="fa fa-bars"></i>
                             </div>
                         </div>
+
+                        {# Start Menu #}
+                        <div class="menu menu-up">
+                            {# zet hier text #}
+                        </div>
+                        {# End Menu #}
             
-                        {%  block header %}
-                        {%  endblock %}
                     </div>
                 {# End Header #}
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row py-lg-5">
                 <div class="col-12 col-lg-4">
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-lg-12" style="background-color: #F0F;">
-                            <div class="pl-lg-4 pr-lg-4">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="px-lg-5">
                             {# Start Agenda #}
                                 <div class="agenda">
-                                    <h2> Agenda </h2>
+                                    <div class="logo">
+                                        <img src="assets/img/verrukkulluk-agenda.png">
+                                    </div>
                                     <ul class="fa-ul">
                                         {% for i in range(1, 5) %}
                                             <li>
                                                 <div class="fa-li">
-                                                    <i class="fa fa-calendar fa-2x"></i>
+                                                    <i class="fa fa-calendar fa-2x" style="color: white;"></i>
                                                 </div>
-
                                                 <div class="agenda-text">
                                                     <h3> Vegetarisch Koken </h3>
-                                                    <p> Een workshop vegetarisch koken, onder leading van Trientje Hupsakee. </p>
+                                                    <p> Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee. </p>
                                                 </div>
                                             </li>
                                         {% endfor %}
@@ -74,7 +117,7 @@
                             {# End Agenda #}
                             </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-lg-12" style="background-color: #F8F;">
+                        <div class="col-12 col-md-6 col-lg-12" style="background-color: #F8F;">
                             <div class="pl-lg-4 pr-lg-4">
                             {# Start Login #}
                                 <div class="login">
@@ -85,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-12 col-lg-8" style="background-color: #FBF;">
+                <div class="col-12 col-md-12 col-lg-8" style="background-color: #FBF;">
                     <div class="pl-lg-4 pr-lg-4">
                     {# Start Content #}
                         <div class="content">
@@ -101,15 +144,11 @@
                 <div class="col-12">
                 {# Start Footer #}
                     <div class="footer">
-
-                        
                         {# Start Footer Logo #}
-                            <div class="contact">   
+                            <div class="logo">   
                                 <img src="assets/img/verrukkulluk-pay-off.png"/>
                             </div>
                         {# End Footer Logo #}
-                        
-                    
                         {# Start Contact #}
                             <div class="contact">
                                 <img src="assets/img/verrukkulluk-contact.png"/>
@@ -121,7 +160,6 @@
                                 </ul>
                             </div>
                         {# End Contact #}
-          
                     </div>
                 {# End Footer #}
                 </div>

@@ -41,7 +41,10 @@ $grocery->addFunctionality($ingredient);
 // UPDATE
 
 $action = defaultGET("action", "homepage");
+$recipe_id = defaultGET("recipe_id", "");
+
 // debuginfo($action);
+// debuginfo($recipe_id);
 
 switch($action) {
 
@@ -56,14 +59,13 @@ switch($action) {
         $template = 'detail.html.twig';
 
         $title = "Details";
-
+        $data = $recipe->selectRecipe($recipe_id);
         break;
     }
 }
 
 
 $template = $twig->load($template);
-
 
 
 echo $template->render([
