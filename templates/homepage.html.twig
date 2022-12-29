@@ -9,47 +9,57 @@
 
 {% block content %}
     
-    <div class="row">
-        {% for record in data|slice(0, 4) %}
-            <div class="col-12 col-xl-12 col-xxl-6">
-                <div class="px-lg-3 pb-lg-5">
-                    {# Start Meal #}
-                    <div class="meal">
+    <div class="homepage">
+        <div class="row">
+            {% for recipe in data|slice(0, 4) %}
+                <div class="col-12 col-xl-12 col-xxl-6">
+                    <div class="px-lg-3 pb-lg-5">
+                        {# Start Meal #}
+                        <div class="meal">
 
-                        <div class="image" style="background-image: url({{record.picture}})">
-                            
-                        </div>
-
-                        <div class="info">
-                            <h2> {{record.title}} </h2>
-
-                            <div class="rating">
-                                {% for i in range(1, 5) %}
-                                    {% if record.rating_average|round >= i %}
-                                        <i class="star fas fa-star fa-2x" data-value="{{i}}"></i>
-                                    {% else %}
-                                        <i class="star far fa-star fa-2x" data-value="{{i}}"></i>
-                                    {% endif %}
-                                {% endfor %}
+                            <div class="image" style="background-image: url({{recipe.picture}})">
+                                
                             </div>
 
-                            <p> 
-                                {{record.description_long}}
-                            </p>
+                            <div class="info">
 
-                            <div class="extra">
-                                <h3> <a href="./index.php?action=detail&recipe_id={{record.id}}"> Smullen! </a> </h3>
-                                <div class="calories"> <i class="fas fa-fire fa-lg"></i> {{(record.calories_total / 1000)|round()}} </div>
-                                <div class="price"> <i class="fas fa-euro-sign fa-lg"></i> {{(record.price_total / 100)|number_format(2, '.', ',')}} </div>
-                                <div class="people"> <i class="fas fa-user-friends fa-lg"></i> 4 </div>
+                                <div>
+                                    <h2> {{recipe.title}} </h2>
+
+                                    <div class="rating">
+                                        {% for i in range(1, 5) %}
+                                            {% if recipe.rating_average|round >= i %}
+                                                <i class="star fas fa-star fa-lg" data-value="{{i}}"></i>
+                                            {% else %}
+                                                <i class="star far fa-star fa-lg" data-value="{{i}}"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <p> 
+                                    {{recipe.description_short}}
+                                </p>
+
+                                <div class="extra">
+                                    
+                                    <form action="./index.php" method="GET">
+                                        <input type="hidden" name="action" value="detail">
+                                        <input type="hidden" name="recipe_id" value="{{recipe.id}}">
+                                        <button> Smullen! </button>
+                                    </form>
+
+                                    <div class="calories"> <i class="fas fa-fire fa-lg"></i> {{(recipe.calories_total / 1000)|round()}} </div>
+                                    <div class="price"> <i class="fas fa-euro-sign fa-lg"></i> {{(recipe.price_total / 100)|number_format(2, '.', ',')}} </div>
+                                    <div class="people"> <i class="fas fa-user-friends fa-lg"></i> 4 </div>
+                                </div>
                             </div>
-                            
+                        {# End Meal #}
                         </div>
-                    {# End Meal #}
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

@@ -43,8 +43,7 @@ $grocery->addFunctionality($ingredient);
 $action = defaultGET("action", "homepage");
 $recipe_id = defaultGET("recipe_id", "");
 
-// debuginfo($action);
-// debuginfo($recipe_id);
+$user_id = 1;
 
 switch($action) {
 
@@ -62,14 +61,29 @@ switch($action) {
         $data = $recipe->selectRecipe($recipe_id);
         break;
     }
+    case "favorite": {
+        
+        $favorite = $recipe_info->isFavorite($recipe_id, $user_id);
+        
+        if ($favorite) {
+            $recipe_info->removeFavorite($recipe_id, $user_id);
+        }
+        else {
+            $recipe_info->addFavorite($recipe_id, $user_id);
+        }
+
+        echo !$favorite;
+        return;
+    }
 }
 
 
 $template = $twig->load($template);
 
-
 echo $template->render([
     "title" => $title, 
-    "data" => $data
+    "data" => $data,
+    "user" => $user->selectUser($user_id)
 ]);
+
 

@@ -16,16 +16,62 @@
 
         <script>
 
+            function consoleClasses(name) {
+                var classList = $(name)[0].className.split(' ')
+                console.log(classList)
+            }
+
+
             function openDropdown() {
                 $('.header .menu').removeClass("menu-up")
                 $('.header .menu').addClass("menu-down")
-                dropdown_open = true
             }
 
             function closeDropdown() {
                 $('.header .menu').removeClass("menu-down")
                 $('.header .menu').addClass("menu-up")
             }
+
+            function favoriteRecipeToggle(recipe_id) {
+                // console.log("called")
+                
+                $.ajax({
+                    url: "./index.php",
+                    method: "GET",
+                    data: {
+                        action: "favorite",
+                        recipe_id: recipe_id},
+                    success: function(data) {
+                        // console.log(data)
+
+                        $('.heart i').removeClass("far")
+                        $('.heart i').removeClass("fas")
+
+                        if (data) {
+                            $('.heart i').addClass("fas")
+                        } else {
+                            $('.heart i').addClass("far")
+                        }    
+                    }
+                })  
+            }
+
+
+            function changeVesselOption(vessel_option_id) {
+                $(".detail .vessel").html($(`.detail ${vessel_option_id}.vessel-option`).html())
+
+                moveVesselHeader(vessel_option_id)
+            }   
+
+            function moveVesselHeader(vessel_option_id) {
+                const main_elem = $(`.detail .vessel-header h3${vessel_option_id}`)
+                const main_index = $(".detail .vessel-header h3").index(main_elem)
+                
+                $(".detail .vessel-header h3").each((index, elem) => {
+                    $(elem).css('z-index', 100 - 10 * Math.abs(main_index - index))
+                })
+            }
+
 
             let dropdown_hovering = false
 
@@ -45,8 +91,9 @@
                 
                 $(".menu-button").click(function() {
                     openDropdown()
-                }) 
-   
+                })
+
+                changeVesselOption("#ingredient")
             });    
             
         </script>
@@ -67,12 +114,12 @@
                         </div>
 
                         <div class="tools">
-                            <div class="search">
+                            <form>
                                 <button type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
                                 <input type="text" placeholder="Zoeken">
-                            </div>
+                            </form>
 
                             <div class="menu-button">
                                 <i class="fa fa-bars"></i>
@@ -94,7 +141,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-12">
-                            <div class="px-lg-5">
+                            <div class="px-xl-5">
                             {# Start Agenda #}
                                 <div class="agenda">
                                     <div class="logo">
@@ -117,22 +164,37 @@
                             {# End Agenda #}
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-12" style="background-color: #F8F;">
-                            <div class="pl-lg-4 pr-lg-4">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="px-xl-5">
                             {# Start Login #}
                                 <div class="login">
-                                    <h2> Login </h2>
+                                    <div class="logo">
+                                        <img src="assets/img/verrukkulluk-login.png">
+                                    </div>
+
+                                    <form>
+                                        <div class="email">
+                                            <label for="email"> Email </label>
+                                            <input type="text" name="email">
+                                        </div>
+                                        <div class="wachtwoord">
+                                            <label for="wachtwoord"> Wachtwoord </label>
+                                            <input type="text" name="wachtwoord">
+                                        </div>
+                                        
+                                        <button type="submit"> Login </button>
+                                    </form>
+            
                                 </div>
                             {# End Login #}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-12 col-lg-8" style="background-color: #FBF;">
+                <div class="col-12 col-md-12 col-lg-8">
                     <div class="pl-lg-4 pr-lg-4">
                     {# Start Content #}
                         <div class="content">
-                            <h2> Content </h2>
                             {%  block content %}
                             {%  endblock %}
                         </div>
