@@ -11,7 +11,7 @@
 
     <div class="detail">
 
-        <div class="meal">
+        <div id="recipe_id{{data.id}}" class="meal">
             <div class="image" style="background-image: url({{data.picture}})">                  
             </div>
 
@@ -26,11 +26,11 @@
                     <h2> {{data.title}} </h2>
                     <div class="rating">
                         {% for i in range(1, 5) %}
-                            {% if data.rating_average|round >= i %}
-                                <i class="star fas fa-star fa-lg" data-value="{{i}}"></i>
-                            {% else %}
-                                <i class="star far fa-star fa-lg" data-value="{{i}}"></i>
-                            {% endif %}
+                            <i {% if data.rating_average|round >= i %} 
+                                    class="star fas fa-star fa-lg"
+                                {% else %} 
+                                    class="star far fa-star fa-lg"
+                                {% endif %} onclick="rateRecipe({{data.id}}, {{i}})" star-rating={{i}}> </i>
                         {% endfor %}
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                     <form action="./index.php" method="GET">
                         <input type="hidden" name="action" value="detail">
                         <input type="hidden" name="recipe_id" value="{{data.id}}">
-                        <button> Op lijst </button>
+                        <button onclick="addGroceryRecipe({{data.id}})"> Op lijst </button>
                     </form>
 
                     <div class="heart" onclick="favoriteRecipeToggle({{data.id}})">
@@ -58,17 +58,16 @@
                 </div>
             </div>
 
-
         </div>
 
         <div class="vessel-header">
-            <h3 id="ingredient" onclick="changeVesselOption('#ingredient')">
+            <h3 id="ingredient" onclick="changeVesselOption('ingredient')">
                 Ingredienten
             </h3>
-            <h3 id="preparation" onclick="changeVesselOption('#preparation')">
+            <h3 id="preparation" onclick="changeVesselOption('preparation')">
                 Bereidingswijze
             </h3>
-            <h3 id="comment" onclick="changeVesselOption('#comment')">
+            <h3 id="comment" onclick="changeVesselOption('comment')">
                 Opmerkingen
             </h3>
         </div>
@@ -78,15 +77,47 @@
         </div>
 
         <div id="ingredient" class="vessel-option" style="display: none;">
-            Ingredient
+
+            <ul>
+                {% for ingredient in data.ingredient %}
+                    <li>
+                        <div class="image" style="background-image: url({{ingredient.picture}})"> </div>
+                        <div class="info"> 
+                            <h2> {{ingredient.name}} </h2>
+                            <p> {{ingredient.description}} </p>
+                            
+                            <div class="quantity"> <span> Hoeveelheid: </span> {{ingredient.quantity_used}} {{ingredient.unit}} </div> 
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
 
         <div id="preparation" class="vessel-option" style="display: none;">
-            Preparation
+            <ul>
+                {% for step in data.preparation %}
+                    <li>
+                        <div class="image"> <div class="number"> <b>{{step.field_number}}.</b> </div> </div>
+                        <div class="info">
+                            <p> {{step.field_text}} </p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
 
         <div id="comment" class="vessel-option" style="display: none;">
-            Comment
+            <ul>
+                {% for comment in data.comment %}
+                    <li>
+                        <div class="image" style="background-image: url({{comment.user.picture}})"> </div>
+                        <div class="info">
+                            <h2> {{comment.user.username}} </h2>
+                            <p> {{comment.field_text}} </p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 {% endblock %}

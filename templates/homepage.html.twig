@@ -15,12 +15,9 @@
                 <div class="col-12 col-xl-12 col-xxl-6">
                     <div class="px-lg-3 pb-lg-5">
                         {# Start Meal #}
-                        <div class="meal">
+                        <div id="recipe_id{{recipe.id}}" class="meal">
 
-                            <div class="image" style="background-image: url({{recipe.picture}})">
-                                
-                            </div>
-
+                            <div class="image" style="background-image: url({{recipe.picture}})"> </div>
                             <div class="info">
 
                                 <div>
@@ -28,11 +25,11 @@
 
                                     <div class="rating">
                                         {% for i in range(1, 5) %}
-                                            {% if recipe.rating_average|round >= i %}
-                                                <i class="star fas fa-star fa-lg" data-value="{{i}}"></i>
-                                            {% else %}
-                                                <i class="star far fa-star fa-lg" data-value="{{i}}"></i>
-                                            {% endif %}
+                                            <i {% if recipe.rating_average|round >= i %} 
+                                                    class="star fas fa-star fa-lg"
+                                                {% else %} 
+                                                    class="star far fa-star fa-lg"
+                                                {% endif %} onclick="rateRecipe({{recipe.id}}, {{i}})" star-rating={{i}}> </i>
                                         {% endfor %}
                                     </div>
                                 </div>

@@ -42,6 +42,7 @@ $grocery->addFunctionality($ingredient);
 
 $action = defaultGET("action", "homepage");
 $recipe_id = defaultGET("recipe_id", "");
+$rating = defaultGET("rating", "");
 
 $user_id = 1;
 
@@ -50,31 +51,53 @@ switch($action) {
     case "homepage": {
         $template = 'homepage.html.twig';
 
-        $title = "Home";
+        $title = "home";
         $data = $recipe->selectRecipeAll();
         break;
     }
     case "detail": {
         $template = 'detail.html.twig';
 
-        $title = "Details";
+        $title = "detail";
         $data = $recipe->selectRecipe($recipe_id);
         break;
     }
+    case "grocery": {
+        $template = 'grocery.html.twig';
+
+        $title = "grocery";
+        $data = [];
+        break;
+    }
+
     case "favorite": {
-        
         $favorite = $recipe_info->isFavorite($recipe_id, $user_id);
-        
         if ($favorite) {
             $recipe_info->removeFavorite($recipe_id, $user_id);
-        }
-        else {
+        } else {
             $recipe_info->addFavorite($recipe_id, $user_id);
         }
 
         echo !$favorite;
         return;
     }
+
+    case "rate": {
+        $valid = false;
+        if (0 < $rating && $rating < 6) {
+            $recipe_info->addRating($recipe_id, $rating);
+            $valid = true;
+        }
+
+        echo $recipe->selectRecipe($recipe_id)["rating_average"];
+        return;
+    }
+
+    case "addgrocery": {
+        $grocery->addGroceryRecipe($user_id, $recipe_id);
+        return;
+    }
+
 }
 
 

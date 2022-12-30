@@ -59,6 +59,10 @@ Class RecipeInfo{
         $sql_result = mysqli_query($this->connection, $sql);
     }
 
+    public function addRating($recipe_id, $rating) {
+        $sql = "INSERT INTO recipe_info (record_type, recipe_id, field_number) VALUES ('R', $recipe_id, $rating)";
+        $sql_result = mysqli_query($this->connection, $sql);
+    }
 }
 
 ?>

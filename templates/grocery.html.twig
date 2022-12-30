@@ -1,0 +1,45 @@
+{# Opnemen van de "Main" file #}
+{% extends "main.html.twig" %}
+
+{% block header %}
+    <div class="background" style="background-image: url(https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);">
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="grocery">
+        <h1> Boodschappen </h1>
+
+        <ul>
+            {% for grocery in user.grocery %}
+                <li>
+                    <div class="image" style="background-image: url({{grocery.picture}})"> </div>
+                    <div class="info"> 
+                        <div class="text">
+                            <h2> {{grocery.name}} </h2>
+                            <p> {{grocery.description}} </p>
+                        </div>
+                        <div class="amount">
+                            {{grocery.amount}}
+                        </div>
+                    </div>
+                    <div class="remove">
+                        <i class="fas fa-trash-alt fa-2x"></i>
+                    </div>
+                    <div class="price">
+                        <i class="fas fa-euro-sign fa-2x"></i> {{(grocery.amount * grocery.price / 100)|number_format(2, '.', ',')}}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="remove">
+            <i class="fas fa-trash-alt fa-2x"></i>
+        </div>
+        <div class="price">
+            <div class="price"> <i class="fas fa-euro-sign fa-lg"></i> {{(user.price_total / 100)|number_format(2, '.', ',')}} </div>
+        </div> 
+    </div>
+
+{% endblock %}

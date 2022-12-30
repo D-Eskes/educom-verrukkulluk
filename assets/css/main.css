@@ -88,9 +88,14 @@ input:focus, button:focus {
 .header .logo {
     display: inline-block;
     width: 40%;
+    max-width: 400px;
     padding-left: 10px;
     padding-top: 10px;
-    max-width: 400px;
+} 
+
+.header .logo button {
+    border: none;
+    background: none;
 }
 
 .header .logo img {
@@ -165,6 +170,26 @@ input:focus, button:focus {
     top: 0px;
 }
 
+.header .menu .link {
+    float: right;
+    width: 30%;
+    height: 100%;
+    margin-left: 10px;
+    text-align: center;
+} 
+
+.header .menu .link button {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    font-family: var(--heading);
+    font-size: 54px;
+    color: var(--lighter-red);
+} 
+
+
 
 /* AGENDA */
 .agenda {
@@ -172,6 +197,7 @@ input:focus, button:focus {
     margin: 20px;
     padding: 10px;
     margin-top: 0px;
+    box-shadow: 1px 1px 4px #888888ac;
 }
 
 .agenda .logo {
@@ -206,6 +232,7 @@ input:focus, button:focus {
     background-color: var(--darker-red);
     margin: 20px;
     padding: 10px;
+    box-shadow: 1px 1px 4px #888888ac;
 }
 
 .login .logo {
@@ -248,22 +275,20 @@ input:focus, button:focus {
     font-family: var(--heading);
     font-size: 36px;
     color: var(--white);
-    background-color: var(--darker-orange);
+    background-color: var(--lighter-orange);
     border-radius: 30px;
     border: none;
 }
 
 
 /* CONTENT */
-.content {
-    text-align: center
-}
+
 
 /* Homepage */
 .homepage .meal {
     text-align: left;
     background-color: var(--white);
-    border: 1px solid var(--black)
+    box-shadow: 0px 0px 4px #888888ac;
 }
 
 .homepage .meal .image {
@@ -343,7 +368,7 @@ input:focus, button:focus {
     height: 50%;
     min-height: 400px;
     background-color: var(--white);
-    border: 1px solid var(--black)
+    box-shadow: 1px 4px 8px #888888ac;
 }
 
 .detail .meal .image {
@@ -413,9 +438,12 @@ input:focus, button:focus {
 .detail .meal .info .description {
     width: 100%;
     height: 60%;
-    overflow: auto;
     padding-top: 20px;
+    overflow: auto;
+}
 
+.detail .meal .info .description::-webkit-scrollbar {
+    display: none;
 }
 
 .detail .meal .info .description p {
@@ -474,33 +502,198 @@ input:focus, button:focus {
     box-shadow: -1px -2px 1px #8888882e;
 }
 
-.detail .vessel-header h3#ingredient {
-    z-index: 100;
-}
-
-.detail .vessel-header h3#preparation {
-    z-index: 90;
-}
-
-.detail .vessel-header h3#comment {
-    z-index: 80;
-}
-
 .detail .vessel {
     position: relative;
     z-index: 95;
     display: block;
     background-color: var(--white);
-    padding: 50px;
+    padding: 30px;
     box-shadow: 2px 2px 6px #888888ac;
+    height: 450px;
 }
+
+.detail .vessel ul {
+    list-style: none;
+    height: 100%;
+    overflow: auto;
+}
+
+.detail .vessel ul::-webkit-scrollbar {
+    display: none;
+}
+
+.detail .vessel li {
+    display: flex;
+    margin-bottom: 15px;
+}   
+
+.detail #ingredient.vessel .image {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.detail #ingredient.vessel .info {
+    display: inline-block;
+    padding-left: 30px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.detail #ingredient.vessel .info h2 {
+    text-transform: capitalize;
+    color: var(--darker-green);
+}
+
+.detail #ingredient.vessel .info .quantity {
+    display: inline-block;
+    margin-top: -10px;
+    font-size: 14px;
+}
+
+.detail #ingredient.vessel .info .quantity span {
+    color: var(--darker-green);
+    font-family: var(--heading);
+    font-size: 20px;
+
+}
+
+.detail #preparation.vessel .image {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    aspect-ratio: 1;
+
+    background-color: var(--lighter-orange);
+    border-radius: 50%;
+}
+
+.detail #preparation.vessel .image .number {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 28%;
+    top: -2%;
+    color: var(--white);
+    font-size: 55px;
+}
+
+.detail #preparation.vessel .info {
+    display: inline-block;
+    padding-top: 10px;
+    padding-left: 20px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+
+.detail #comment.vessel .image {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+    border: 5px solid var(--lighter-orange);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.detail #comment.vessel .info {
+    display: inline-block;
+    padding-top: 10px;
+    padding-left: 20px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.detail #comment.vessel .info h2 {
+    color: var(--darker-green);
+}
+
+
+/* Grocery */
+.grocery {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.177);
+    padding: 40px;
+    padding-top: 10px;
+    height: 100%;
+}
+
+.grocery h1 {
+    color: var(--darker-green);
+    font-size: 64px;
+}
+
+.grocery ul {
+    list-style: none;
+    height: 80%;
+    overflow: auto;
+    background-color: red;
+}
+
+.grocery ul::-webkit-scrollbar {
+    display: none;
+}
+
+.grocery li {
+    display: block;
+    margin-bottom: 15px;
+    background-color: blue;
+}   
+
+.grocery .image {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.grocery .info {
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 10px;
+    width: 60%;
+    background-color: yellow;
+}
+
+.grocery .info h2 {
+    text-transform: capitalize;
+    color: var(--darker-green);
+}
+
+.grocery .info .text {
+    display: inline-block;
+    width: 80%;
+}
+
+.grocery .info .amount {
+    float: right;
+}
+
+.grocery .price {
+    background-color: green;
+    float: right;
+}
+
+.grocery .remove {
+    background-color: purple;
+    float: right
+}
+
 
 
 /* FOOTER */
 .footer {
     display: inline-flex;
     width: 100%;
-    background-color: purple;
+    background-color: var(--darker-orange);
 }
 
 .footer .logo {
