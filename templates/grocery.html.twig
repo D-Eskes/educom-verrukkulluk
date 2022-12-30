@@ -17,29 +17,31 @@
                 <li>
                     <div class="image" style="background-image: url({{grocery.picture}})"> </div>
                     <div class="info"> 
-                        <div class="text">
-                            <h2> {{grocery.name}} </h2>
-                            <p> {{grocery.description}} </p>
-                        </div>
-                        <div class="amount">
-                            {{grocery.amount}}
-                        </div>
+                        <h2> {{grocery.name}} </h2>
+                        <p> {{grocery.description}} </p>
                     </div>
-                    <div class="remove">
-                        <i class="fas fa-trash-alt fa-2x"></i>
+                    <div class="amount"> 
+                        {{grocery.amount}} 
                     </div>
-                    <div class="price">
-                        <i class="fas fa-euro-sign fa-2x"></i> {{(grocery.amount * grocery.price / 100)|number_format(2, '.', ',')}}
+                    <div class="align">
+                        <div class="price">
+                            <div> <i class="fas fa-euro-sign fa-2x"></i> <span>{{(grocery.amount * grocery.price / 100)|number_format(2, '.', ',')}} </span> </div>
+                        </div>
+                        <div class="remove">
+                            <i class="fas fa-trash-alt fa-2x"></i>
+                        </div>
                     </div>
                 </li>
             {% endfor %}
         </ul>
-        <div class="remove">
-            <i class="fas fa-trash-alt fa-2x"></i>
+        <div class="align">
+            <div class="price">
+                            <div> <i class="fas fa-euro-sign fa-2x"></i> <span>{{(user.price_total / 100)|number_format(2, '.', ',')}} </span> </div>
+                        </div>
+            <div class="remove">
+                <i class="fas fa-trash-alt fa-2x"></i>
+            </div>
         </div>
-        <div class="price">
-            <div class="price"> <i class="fas fa-euro-sign fa-lg"></i> {{(user.price_total / 100)|number_format(2, '.', ',')}} </div>
-        </div> 
     </div>
 
 {% endblock %}

@@ -633,7 +633,6 @@ input:focus, button:focus {
     list-style: none;
     height: 80%;
     overflow: auto;
-    background-color: red;
 }
 
 .grocery ul::-webkit-scrollbar {
@@ -641,9 +640,8 @@ input:focus, button:focus {
 }
 
 .grocery li {
-    display: block;
+    display: flex;
     margin-bottom: 15px;
-    background-color: blue;
 }   
 
 .grocery .image {
@@ -668,23 +666,34 @@ input:focus, button:focus {
     color: var(--darker-green);
 }
 
-.grocery .info .text {
-    display: inline-block;
-    width: 80%;
+.grocery .amount {
+    background-color: pink;
 }
 
-.grocery .info .amount {
-    float: right;
+.grocery .align {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    background-color: orange
 }
-
 .grocery .price {
     background-color: green;
-    float: right;
+    width: 120px;
 }
 
 .grocery .remove {
     background-color: purple;
-    float: right
+}
+
+.grocery .amount, .grocery .price, .grocery .remove {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.grocery i {    
+    color: var(--lighter-red);
 }
 
 
