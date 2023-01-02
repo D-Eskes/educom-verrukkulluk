@@ -1,16 +1,10 @@
 <?php
 
-function debug($data) {
-    echo "<pre>";
-    var_dump($data);
-}
+require_once("debug.php");
 
-
-
-class artikel {
+class Artikel {
 
     private $connection;
-
     public function __construct($connection) {
         $this->connection = $connection;
     }

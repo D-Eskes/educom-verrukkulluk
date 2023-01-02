@@ -1,14 +1,17 @@
 <?php 
 
+require_once("debug.php");
+
 // Aanpassen naar je eigen omgeving
+define("HOST", "localhost");
 define("USER", "root");
 define("PASSWORD", "");
-define("DATABASE", "verrukkulluk");
-define("HOST", "localhost");
+define("DATABASE", "db_verrukkulluk");
 
 
 
-class database {
+
+class Database {
 
     private $connection;
 

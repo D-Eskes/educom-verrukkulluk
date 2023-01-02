@@ -1,17 +1,20 @@
 <?php
 
+require_once("lib/debug.php");
+
 require_once("lib/database.php");
 require_once("lib/artikel.php");
 
 /// INIT
-$db = new database();
-$art = new artikel($db->getConnection());
+$db = new Database();
+$art = new Artikel($db->getConnection());
 
 
 /// VERWERK 
-$data = $art->selecteerArtikel(8);
+$data = debuginfo($art->selecteerArtikel(1));
 
-/// RETURN
-var_dump($data);
+
+
+
 
 ?>
