@@ -1,0 +1,758 @@
+/**
+ VERRUKKULLUK MAIN.CSS
+ */
+
+:root {
+
+    /* FONTS */
+    --heading: "pretty_lilyregular";
+
+    /* COLORS */
+    --dark-brown: #402214;
+    --lighter-brown:  #774231;
+    --lightest-brown: #aa4b1b;
+
+    --darker-red: #b31714;
+    --lighter-red: #dc3439;
+
+    --kahki: #fff0d6;
+
+    --darker-orange: #eb8d1f;
+    --lighter-orange: #fca01f;
+
+    --darker-green: #6e8722;
+    --lighter-green: #95b82d;
+
+    --white: #FFF;
+    --black: #000;
+
+    --search-bar-color: var(--kahki)
+
+}
+
+
+
+/** HEADING **/
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading) !important;
+}
+
+h1 {
+    font-size: 52px;
+}
+
+h2 {
+    font-size: 42px;
+}
+
+h3, h4, h5 {
+    font-size: 32px;
+}
+
+
+
+/** HTML / BODY **/
+html, body {
+    font-family: "Helvetica Neue", Arial, SansSerif;
+    font-size: 16px;
+}
+
+
+/* OWN CHANGES */
+input:focus, button:focus {
+    outline: none;
+}
+
+/* HEADER */
+.header {
+    width: 100%;
+    aspect-ratio: 3;
+    position: relative;
+}
+
+.header .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    width: 100%;
+    height: 100%;
+    background-image: url("");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: yellow;
+}
+
+.header .logo {
+    display: inline-block;
+    width: 40%;
+    max-width: 400px;
+    padding-left: 10px;
+    padding-top: 10px;
+} 
+
+.header .logo button {
+    border: none;
+    background: none;
+}
+
+.header .logo img {
+    width: 100%;
+}
+
+.header .tools {
+    display: inline-flex;
+    float: right;
+    padding-right: 1%;
+    padding-top: 1%;
+}
+
+.header .tools form {
+    display: inline-flex;
+    width: 100%;
+}
+
+.header .tools form input {
+    width: 100%;
+    border: 3px solid var(--search-bar-color);
+    border-left: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 0px 10px 10px 0px;
+    outline: none;
+}
+
+.header .tools form button {
+    width: 40px;
+    height: 36px;
+    border: 1px solid var(--search-bar-color);
+    background: var(--search-bar-color);
+    text-align: center;
+    color: var(--black);
+    border-radius: 10px 0px 0px 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.header .menu-button {
+    transition: all 0.4s ease;
+    cursor: pointer;
+    padding: 0px;
+    margin-left: 5px;
+}
+
+.header .menu-button i {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 36px;
+    color: var(--search-bar-color);
+}
+
+.header .menu {
+    position: absolute;
+
+    width: 100%;
+    height: 40%;
+
+    background-color: var(--white);
+    border: 1px solid var(--black);
+    transition: all 0.2s ease;
+}
+
+.menu-up {
+    top: calc(-2 * 30%);
+}
+
+.menu-down {
+    top: 0px;
+}
+
+.header .menu .link {
+    float: right;
+    width: 30%;
+    height: 100%;
+    margin-left: 10px;
+    text-align: center;
+} 
+
+.header .menu .link button {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    font-family: var(--heading);
+    font-size: 54px;
+    color: var(--lighter-red);
+} 
+
+
+
+/* AGENDA */
+.agenda {
+    background-color: var(--lighter-green);
+    margin: 20px;
+    padding: 10px;
+    margin-top: 0px;
+    box-shadow: 1px 1px 4px #888888ac;
+}
+
+.agenda .logo {
+    position: relative;
+    width: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.agenda .logo img {
+    width: 100%;
+}
+
+.agenda ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.agenda li {
+    margin-left: 60px;
+    margin-right: 30px;
+}
+
+.agenda li .agenda-text{
+    display: block;
+    margin-left: 20px;
+}
+
+
+/* LOGIN */
+.login {
+    background-color: var(--darker-red);
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 1px 1px 4px #888888ac;
+}
+
+.login .logo {
+    position: relative;
+    width: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.login .logo img {
+    width: 100%;
+}
+
+.login form .email, .login form .wachtwoord {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.login form label {
+    display: block;
+    color: var(--white);
+    font-size: 14px;
+}
+
+.login form input {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+
+.login form button {
+    margin-top: 40px;
+    position: relative;
+    width: 56%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-family: var(--heading);
+    font-size: 36px;
+    color: var(--white);
+    background-color: var(--lighter-orange);
+    border-radius: 30px;
+    border: none;
+}
+
+
+/* CONTENT */
+
+
+/* Homepage */
+.homepage .meal {
+    text-align: left;
+    background-color: var(--white);
+    box-shadow: 0px 0px 4px #888888ac;
+}
+
+.homepage .meal .image {
+    width: 100%;
+    height: 300px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.homepage .meal .info {
+    width: 100%;
+    padding: 5%;
+    overflow: auto;
+}
+
+.homepage .meal .info h2 {
+    display: inline-block;
+    text-transform: capitalize;
+    color: var(--darker-green)
+}
+
+.homepage .meal .info .rating {
+    padding-top: 20px;
+    float: right;
+}
+
+.homepage .meal .info .rating .star {
+    color: var(--lighter-orange);
+    display: inline-block;
+    margin-left: -5px;
+    cursor: pointer;
+}
+
+.homepage .meal .info .extra {
+    padding-top: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.homepage .meal .info .extra form {
+    display: inline;
+}
+
+.homepage .meal .info .extra form button {
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 40px;
+    border: none;
+
+    color: var(--white);
+    background-color: var(--lighter-red);
+    font-family: var(--heading);
+    font-size: 36px;
+}
+
+.homepage .meal .info .extra .people, .homepage .meal .info .extra .price, .homepage .meal .info .extra .calories {
+    float: right;
+    padding-top: 8px;
+    padding-left: 12px;
+}
+
+.homepage .meal .info .extra i {
+    margin-right: -2px;
+    color: var(--lighter-red);
+}
+
+
+/* Detail */
+.detail {
+    text-align: left;
+}
+
+.detail .meal {
+    display: inline-flex;
+    width: 100%;
+    height: 50%;
+    min-height: 400px;
+    background-color: var(--white);
+    box-shadow: 1px 4px 8px #888888ac;
+}
+
+.detail .meal .image {
+    height: 100%;
+    width: 50%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.detail .meal .info {
+    width: 50%;
+    padding: 50px;
+}
+
+.detail .meal .info .extra i {
+    color: var(--lighter-red);
+}
+
+.detail .meal .info .extra .people, .detail .meal .info .extra .price, .detail .meal .info .extra .calories {
+    display: inline-block;
+    padding-right: 12px;
+}
+
+.detail .meal .info .title-rating {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.detail .meal .info .title-rating h2 {
+    display: inline-block;
+    text-transform: capitalize;
+    color: var(--darker-green);
+}
+
+.detail .meal .info .title-rating .rating {
+    padding-top: 20px;
+    float: right;
+}
+
+.detail .meal .info .rating .star {
+    color: var(--lighter-orange);
+    display: inline-block;
+    margin-left: -5px;
+    cursor: pointer;
+}
+
+.detail .meal .info .kitchen-type {
+    width: 100%;
+}
+
+.detail .meal .info .kitchen-type h3 {
+    display: inline;
+    color: var(--darker-green);
+    padding-right: 25px;
+}
+
+.detail .meal .info .kitchen-type .kitchen {
+    display: inline-block;
+}
+
+.detail .meal .info .kitchen-type .type {
+    float: right;
+}
+
+
+.detail .meal .info .description {
+    width: 100%;
+    height: 60%;
+    padding-top: 20px;
+    overflow: auto;
+}
+
+.detail .meal .info .description::-webkit-scrollbar {
+    display: none;
+}
+
+.detail .meal .info .description p {
+    display: block;
+}
+
+.detail .meal .info .buttons {
+    padding-top: 20px;
+    width: 100%;
+}
+
+.detail .meal .info .buttons form {
+    display: inline-block;
+    color: inherit;
+}
+
+.detail .meal .info .buttons form button {
+    display: inline;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 40px;
+    border: none;
+    
+    color: var(--white);
+    background-color: var(--lighter-red);
+    font-family: var(--heading);
+    font-size: 36px;
+}
+
+.detail .meal .info .buttons .heart {
+    margin-top: -5px;
+    float: right;
+    color: var(--lighter-red);
+    cursor: pointer;
+}
+
+
+.detail .vessel-header {
+    display: inline-flex;
+    padding-top: 50px;
+}
+
+.detail .vessel-header h3 {
+    position: absolute;
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-right: -20px;
+    margin-bottom: -5px;
+
+    color: var(--darker-green);
+    background-color: var(--white);
+    border-radius: 200px 200px 0px 0px;
+    cursor: pointer;
+    box-shadow: -1px -2px 1px #8888882e;
+}
+
+.detail .vessel {
+    position: relative;
+    z-index: 95;
+    display: block;
+    background-color: var(--white);
+    padding: 30px;
+    box-shadow: 2px 2px 6px #888888ac;
+    height: 450px;
+}
+
+.detail .vessel ul {
+    list-style: none;
+    height: 100%;
+    overflow: auto;
+}
+
+.detail .vessel ul::-webkit-scrollbar {
+    display: none;
+}
+
+.detail .vessel li {
+    display: flex;
+    margin-bottom: 15px;
+}   
+
+.detail #ingredient.vessel .image {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.detail #ingredient.vessel .info {
+    display: inline-block;
+    padding-left: 30px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.detail #ingredient.vessel .info h2 {
+    text-transform: capitalize;
+    color: var(--darker-green);
+}
+
+.detail #ingredient.vessel .info .quantity {
+    display: inline-block;
+    margin-top: -10px;
+    font-size: 14px;
+}
+
+.detail #ingredient.vessel .info .quantity span {
+    color: var(--darker-green);
+    font-family: var(--heading);
+    font-size: 20px;
+
+}
+
+.detail #preparation.vessel .image {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    aspect-ratio: 1;
+
+    background-color: var(--lighter-orange);
+    border-radius: 50%;
+}
+
+.detail #preparation.vessel .image .number {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 28%;
+    top: -2%;
+    color: var(--white);
+    font-size: 55px;
+}
+
+.detail #preparation.vessel .info {
+    display: inline-block;
+    padding-top: 10px;
+    padding-left: 20px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+
+.detail #comment.vessel .image {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+    border: 5px solid var(--lighter-orange);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.detail #comment.vessel .info {
+    display: inline-block;
+    padding-top: 10px;
+    padding-left: 20px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.detail #comment.vessel .info h2 {
+    color: var(--darker-green);
+}
+
+
+/* Grocery */
+.grocery {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.177);
+    padding: 40px;
+    padding-top: 10px;
+    height: 100%;
+}
+
+.grocery h1 {
+    color: var(--darker-green);
+    font-size: 64px;
+}
+
+.grocery ul {
+    list-style: none;
+    height: 80%;
+    overflow: auto;
+}
+
+.grocery ul::-webkit-scrollbar {
+    display: none;
+}
+
+.grocery li {
+    display: flex;
+    margin-bottom: 15px;
+}   
+
+.grocery .image {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.grocery .info {
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 10px;
+    width: 60%;
+}
+
+.grocery .info h2 {
+    text-transform: capitalize;
+    color: var(--darker-green);
+}
+
+.grocery .amount {
+    width: 8%;
+    text-align: center;
+}
+
+.grocery .amount span {
+    border: 1px solid rgba(128, 128, 128, 0.228);
+}
+
+.grocery .align {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    /* background-color: orange */
+}
+
+.grocery .price-logo {
+    height: 100%;
+    /* background-color: blue; */
+}
+
+.grocery .price-text{
+    width: 80px;
+    /* background-color: green; */
+}
+
+.grocery .remove {
+    width: 60px;
+    /* background-color: purple; */
+}
+
+.grocery .amount, .grocery .price-logo, .grocery .price-text, .grocery .remove {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    color: black !important;
+}
+
+
+.grocery i {    
+    color: var(--lighter-red);
+}
+
+
+.grocery .totaal {
+    display: flex;
+    color: var(--lighter-red);
+}
+
+.grocery .totaal h2 {
+    display: inline-block;
+    font-family: var(--heading);
+    font-size: 54px;
+    color: var(--darker-red);
+}
+
+
+
+
+/* FOOTER */
+.footer {
+    display: inline-flex;
+    width: 100%;
+    background-color: var(--darker-orange);
+}
+
+.footer .logo {
+    display: inline-block;
+    width: 10%;
+    min-width: 120px;
+}
+
+.footer .logo img {
+    width: 100%;
+}
+
+.footer .contact {
+    display: inline-block;
+    width: 15%;
+    min-width: 180px;
+}
+
+.footer .contact img {
+    width: 100%;
+}
+
+.footer .contact ul {
+    list-style: none;
+    color: var(--white);
+}
