@@ -2,47 +2,61 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<img src="assets/img/logo-v2.png"/>
+    <div class="background" style="background-image: url(https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);">
+
+    </div>
 {% endblock %}
 
-
-{# nu de block content op in de main pagina vullen #}
 {% block content %}
-    {# Dit is commentaar #}
+    
+    <div class="homepage">
+        <div class="row">
+            {% for recipe in data|slice(0, 4) %}
+                <div class="col-12 col-xl-12 col-xxl-6">
+                    <div class="px-lg-3 pb-lg-5">
+                        {# Start Meal #}
+                        <div id="recipe_id{{recipe.id}}" class="meal">
 
-    {# Print #}
-    <h1>Heading #1</h1>
-    <h2>Heading #2</h2>
-    <h3>Heading #3 t/m 5</h3>
+                            <div class="image" style="background-image: url({{recipe.picture}})"> </div>
+                            <div class="info">
 
-    <h4>Dit is de template {{  title }}</h4>
+                                <div>
+                                    <h2> {{recipe.title}} </h2>
 
-{# Loop #}
-    <ul>
-    {% for record in data %}
-        <li>
-            <img src="{{ record.foto }}" style="width: 100px; heigfht: 100px;">
+                                    <div class="rating">
+                                        {% for i in range(1, 5) %}
+                                            <i {% if recipe.rating_average|round >= i %} 
+                                                    class="star fas fa-star fa-lg"
+                                                {% else %} 
+                                                    class="star far fa-star fa-lg"
+                                                {% endif %} onclick="rateRecipe({{recipe.id}}, {{i}})" star-rating={{i}}> </i>
+                                        {% endfor %}
+                                    </div>
+                                </div>
 
-            {{ record.title }}
-            {# sub-loop #}
-            <ul>
-                {% for ingr in record.ingredienten %}
-                    <li>
-                        <span {% if ingr.id < 2 %}style='color: #F00'{% endif %}>{{  ingr.naam }}</span>
+                                <p> 
+                                    {{recipe.description_short}}
+                                </p>
 
-                        {# if #}
-                        {%  if ingr.id == 3 %}
-                            <strong>Dit is ID 3!</strong>
-                        {%  endif  %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
-    {% endfor %}
-    <ul>
-     {# Dump #}
-       <pre>
-        {{ dump(data) }}
-       </pre>
+                                <div class="extra">
+                                    
+                                    <form action="./index.php" method="GET">
+                                        <input type="hidden" name="action" value="detail">
+                                        <input type="hidden" name="recipe_id" value="{{recipe.id}}">
+                                        <button> Smullen! </button>
+                                    </form>
+
+                                    <div class="calories"> <i class="fas fa-fire fa-lg"></i> {{(recipe.calories_total / 1000)|round()}} </div>
+                                    <div class="price"> <i class="fas fa-euro-sign fa-lg"></i> {{(recipe.price_total / 100)|number_format(2, '.', ',')}} </div>
+                                    <div class="people"> <i class="fas fa-user-friends fa-lg"></i> 4 </div>
+                                </div>
+                            </div>
+                        {# End Meal #}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

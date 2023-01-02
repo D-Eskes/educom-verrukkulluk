@@ -1,53 +1,287 @@
 <html lang="nl">
-<head>
+    <head>
+        <title> Verrukkuluk::{{title}} </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <title>het is verrukkuluk! :: {{ TITEL }} </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/fonts.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css" />
+        <link rel="stylesheet" type="text/css" href="assets/vegas/vegas.css" /> 
 
-    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/fonts.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+        <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
+        <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" language="javascript" src="assets/vegas/vegas.js"></script>
 
-    <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
-    <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
+        <script>
 
-</html>
-<body>
-<div class="container-fluid">
+            function consoleClasses(name) {
+                var classList = $(name)[0].className.split(' ')
+                console.log(classList)
+            }
 
-    <div class="row">
-        <div class="col-md-12">
-        {% block header %}
+            function openDropdown() {
+                $('.header .menu').removeClass("menu-up")
+                $('.header .menu').addClass("menu-down")
+            }
+            function closeDropdown() {
+                $('.header .menu').removeClass("menu-down")
+                $('.header .menu').addClass("menu-up")
+            }
+
+            function favoriteRecipeToggle(recipe_id) {
+                // console.log("called")
+                
+                $.ajax({
+                    url: "./index.php",
+                    method: "GET",
+                    data: {
+                        action: "favorite",
+                        recipe_id: recipe_id},
+                    success: function(data) {
+                        // console.log(data)
+
+                        $('.heart i').removeClass("far")
+                        $('.heart i').removeClass("fas")
+
+                        if (data) {
+                            $('.heart i').addClass("fas")
+                        } else {
+                            $('.heart i').addClass("far")
+                        }    
+                    }
+                })  
+            }
+            function rateRecipe(recipe_id, rating) {
+                console.log("called")
+                
+                $.ajax({
+                    url: "./index.php",
+                    method: "GET",
+                    data: {
+                        action: "rate",
+                        recipe_id: recipe_id,
+                        rating: rating},
+                    success: function(data) {
+                        console.log(data) 
+
+                        $(`#recipe_id${recipe_id} .star`).each((index, elem) => {
+                            console.log(index)
+
+                            $(elem).removeClass("fas")
+                            $(elem).removeClass("far")
+
+                            if (data >= $(elem).attr("star-rating")) {
+                                $(elem).addClass("fas")
+                            } else {
+                                $(elem).addClass("far")
+                            }    
+                        })
+                    }
+                })  
+            }
+            function addGroceryRecipe(recipe_id) {
+                console.log("called")
+                
+                $.ajax({
+                    url: "./index.php",
+                    method: "GET",
+                    data: {
+                        action: "addgrocery",
+                        recipe_id: recipe_id},
+                    success: function(data) {
+                        console.log(data)    
+                    }
+                })  
+            }
+
+
+            function changeVesselOption(vessel_option_id) {
+                $(".detail .vessel").html($(`.detail #${vessel_option_id}.vessel-option`).html())
+                $(".detail .vessel").attr('id', vessel_option_id)
+
+                console.log($(".detail .vessel").attr("id"))
+
+                moveVesselHeader(vessel_option_id)
+            }   
+            function moveVesselHeader(vessel_option_id) {
+                const main_elem = $(`.detail .vessel-header h3#${vessel_option_id}`)
+                const main_index = $(".detail .vessel-header h3").index(main_elem)
+                
+                $(".detail .vessel-header h3").each((index, elem) => {
+                    $(elem).css('z-index', 100 - 10 * Math.abs(main_index - index))
+                })
+            }
             
-        {% endblock %}   
+
+        
+            let dropdown_hovering = false
+
+            $(document).ready( function() {
+
+                $('.menu').hover(function() {
+                    dropdown_hovering = true
+                }, function() {
+                    dropdown_hovering = false
+                });
+      
+                $("body").mouseup(function(){
+                    if (!dropdown_hovering) {
+                        closeDropdown()
+                    }
+                });
+                
+                $(".menu-button").click(function() {
+                    openDropdown()
+                })
+            });    
+            
+        </script>
+
+    </head>
+    <body onload="changeVesselOption('ingredient');">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                {# Start Header #}
+                    <div class="header">
+
+                        {%  block header %}
+                        {%  endblock %}
+
+                        <form class="logo" action="./index.php" method="GET">
+                            <input type="hidden" name="action" value="homepage">
+                            <button> <img src="assets/img/verrukkulluk-logo-white.png"> </button>
+                        </form>
+
+                        <div class="tools">
+                            <form>
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <input type="text" placeholder="Zoeken">
+                            </form>
+
+                            <div class="menu-button">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                        </div>
+
+                        {# Start Menu #}
+                        <div class="menu menu-up">
+                            <form class="logo" action="./index.php" method="GET">
+                                <input type="hidden" name="action" value="homepage">
+                                <button> <img src="assets/img/verrukkulluk-logo.png"> </button>
+                            </form>
+
+                            <form class="link" action="./index.php" method="GET">
+                                <input type="hidden" name="action" value="grocery">
+                                <button> Mijn Boodschappenlijst </button>
+                            </form>
+
+                            <form class="link" action="./index.php" method="GET">
+                                <input type="hidden" name="action" value="homepage">
+                                <button> Mijn Favorieten </button>
+                            </form>
+
+                        </div>
+                        {# End Menu #}
+            
+                    </div>
+                {# End Header #}
+                </div>
+            </div>
+
+            <div class="row py-lg-5">
+                <div class="col-12 col-lg-4">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="px-xl-5">
+                            {# Start Agenda #}
+                                <div class="agenda">
+                                    <div class="logo">
+                                        <img src="assets/img/verrukkulluk-agenda.png">
+                                    </div>
+                                    <ul class="fa-ul">
+                                        {% for i in range(1, 5) %}
+                                            <li>
+                                                <div class="fa-li">
+                                                    <i class="fa fa-calendar fa-2x" style="color: white;"></i>
+                                                </div>
+                                                <div class="agenda-text">
+                                                    <h3> Vegetarisch Koken </h3>
+                                                    <p> Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee. </p>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {# End Agenda #}
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="px-xl-5">
+                            {# Start Login #}
+                                <div class="login">
+                                    <div class="logo">
+                                        <img src="assets/img/verrukkulluk-login.png">
+                                    </div>
+
+                                    <form>
+                                        <div class="email">
+                                            <label for="email"> Email </label>
+                                            <input type="text" name="email">
+                                        </div>
+                                        <div class="wachtwoord">
+                                            <label for="wachtwoord"> Wachtwoord </label>
+                                            <input type="text" name="wachtwoord">
+                                        </div>
+                                        
+                                        <button type="submit"> Login </button>
+                                    </form>
+            
+                                </div>
+                            {# End Login #}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 col-lg-8">
+                    <div class="pl-lg-4 pr-lg-4">
+                    {# Start Content #}
+                        <div class="content">
+                            {%  block content %}
+                            {%  endblock %}
+                        </div>
+                    {# End Content #}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                {# Start Footer #}
+                    <div class="footer">
+                        {# Start Footer Logo #}
+                            <div class="logo">   
+                                <img src="assets/img/verrukkulluk-pay-off.png"/>
+                            </div>
+                        {# End Footer Logo #}
+                        {# Start Contact #}
+                            <div class="contact">
+                                <img src="assets/img/verrukkulluk-contact.png"/>
+                                <ul>
+                                    <li> Verrukkuluk </li>
+                                    <li> Poststraat 2b </li>
+                                    <li> Sittard </li>
+                                    <li> info@verrukkulluk.nl </li>
+                                </ul>
+                            </div>
+                        {# End Contact #}
+                    </div>
+                {# End Footer #}
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <h2>Agenda</h2>
-            <i class="fa fa-calendar"></i> FontAwesome <a href="https://fontawesome.com/icons?d=gallery&m=free">Documentation</a><br>
-            <i class="fa fa-file-pdf"></i><a href="https://www.layoutit.com/build">Layout-it</a>
-
-
-        </div>
-        <div class="col-md-9">
-            <h2>Content</h2>
-            {%  block content %}
-            {%  endblock %}
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Footer</h1>
-        </div>
-    </div>
-
-
-</div>
-
-</body>
+    </body>
+</html>

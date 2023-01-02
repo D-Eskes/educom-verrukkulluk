@@ -1,5 +1,123 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<h1>Hallo Bram</h1>
+    <div class="background" style="background-image: url({{data.picture}}); ">
+    
+    </div>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="detail">
+
+        <div id="recipe_id{{data.id}}" class="meal">
+            <div class="image" style="background-image: url({{data.picture}})">                  
+            </div>
+
+            <div class="info">
+                <div class="extra">
+                    <div class="people"> <i class="fas fa-user-friends fa-lg"></i> 4 </div>
+                    <div class="price"> <i class="fas fa-euro-sign fa-lg"></i> {{(data.price_total / 100)|number_format(2, '.', ',')}} </div>
+                    <div class="calories"> <i class="fas fa-fire fa-lg"></i> {{(data.calories_total / 1000)|round()}} </div>
+                </div>
+
+                <div class="title-rating">
+                    <h2> {{data.title}} </h2>
+                    <div class="rating">
+                        {% for i in range(1, 5) %}
+                            <i {% if data.rating_average|round >= i %} 
+                                    class="star fas fa-star fa-lg"
+                                {% else %} 
+                                    class="star far fa-star fa-lg"
+                                {% endif %} onclick="rateRecipe({{data.id}}, {{i}})" star-rating={{i}}> </i>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="kitchen-type">
+                    <div class="kitchen"> <h3> Keuken </h3> <span> {{data.kitchen.description}} <span> </div>
+                    <div class="type"> <h3> Type </h3> <span> {{data.type.description}} <span> </div>
+                </div>
+                
+                <div class="description">
+                    <p> {{data.description_short}} </p>
+                    <p> {{data.description_long}} </p>
+                </div>
+
+                <div class="buttons">
+                    <form action="./index.php" method="GET">
+                        <input type="hidden" name="action" value="detail">
+                        <input type="hidden" name="recipe_id" value="{{data.id}}">
+                        <button onclick="addGroceryRecipe({{data.id}})"> Op lijst </button>
+                    </form>
+
+                    <div class="heart" onclick="favoriteRecipeToggle({{data.id}})">
+                        <i {% if user.id in data.favorite|map(c => c.user_id) %} class="fas fa-heart fa-3x" {% else %} class="far fa-heart fa-3x" {% endif %}></i>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="vessel-header">
+            <h3 id="ingredient" onclick="changeVesselOption('ingredient')">
+                Ingredienten
+            </h3>
+            <h3 id="preparation" onclick="changeVesselOption('preparation')">
+                Bereidingswijze
+            </h3>
+            <h3 id="comment" onclick="changeVesselOption('comment')">
+                Opmerkingen
+            </h3>
+        </div>
+
+        <div class="vessel">
+            
+        </div>
+
+        <div id="ingredient" class="vessel-option" style="display: none;">
+
+            <ul>
+                {% for ingredient in data.ingredient %}
+                    <li>
+                        <div class="image" style="background-image: url({{ingredient.picture}})"> </div>
+                        <div class="info"> 
+                            <h2> {{ingredient.name}} </h2>
+                            <p> {{ingredient.description}} </p>
+                            
+                            <div class="quantity"> <span> Hoeveelheid: </span> {{ingredient.quantity_used}} {{ingredient.unit}} </div> 
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="preparation" class="vessel-option" style="display: none;">
+            <ul>
+                {% for step in data.preparation %}
+                    <li>
+                        <div class="image"> <div class="number"> <b>{{step.field_number}}.</b> </div> </div>
+                        <div class="info">
+                            <p> {{step.field_text}} </p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="comment" class="vessel-option" style="display: none;">
+            <ul>
+                {% for comment in data.comment %}
+                    <li>
+                        <div class="image" style="background-image: url({{comment.user.picture}})"> </div>
+                        <div class="info">
+                            <h2> {{comment.user.username}} </h2>
+                            <p> {{comment.field_text}} </p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
