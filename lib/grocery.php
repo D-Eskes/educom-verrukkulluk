@@ -73,6 +73,7 @@ Class Grocery {
         
         mysqli_query($this->connection, $sql);
     }
+
     public function addGroceryRecipe($user_id, $recipe_id) {
         $ingredients = $this->ingredient->selectIngredient($recipe_id);
         foreach ($ingredients as $ingredient) {
@@ -80,7 +81,13 @@ Class Grocery {
             $amount = ceil($ingredient["quantity_used"] / $ingredient["quantity"]);
             $this->addGrocery($user_id, $article_id, $amount);
         }
+    }
 
+    public function removeGroceryAll($user_id) {
+        $groceries = $this->selectGrocery($user_id);
+        foreach ($groceries as $grocery) {
+            $this->removeGrocery($user_id, $grocery["article_id"], INF);
+        }
     }
     
     

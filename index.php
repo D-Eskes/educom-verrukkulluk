@@ -37,11 +37,11 @@ $recipe = new Recipe($db->getConnection(), $kitchen_type, $user, $ingredient, $r
 
 $grocery->addFunctionality($ingredient);
 
-
 // UPDATE
 
 $action = defaultGET("action", "homepage");
 $recipe_id = defaultGET("recipe_id", "");
+$article_id = defaultGET("article_id", "");
 $rating = defaultGET("rating", "");
 
 $user_id = 1;
@@ -93,8 +93,18 @@ switch($action) {
         return;
     }
 
-    case "addgrocery": {
+    case "addgroceryrecipe": {
         $grocery->addGroceryRecipe($user_id, $recipe_id);
+        return;
+    }
+
+    case "removegrocery": {
+        $grocery->removeGrocery($user_id, $article_id, INF);
+        return;
+    }
+
+    case "removegroceryall": {
+        $grocery->removeGroceryAll($user_id);
         return;
     }
 

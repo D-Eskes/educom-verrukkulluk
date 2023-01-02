@@ -16,11 +16,6 @@
 
         <script>
 
-            function consoleClasses(name) {
-                var classList = $(name)[0].className.split(' ')
-                console.log(classList)
-            }
-
             function openDropdown() {
                 $('.header .menu').removeClass("menu-up")
                 $('.header .menu').addClass("menu-down")
@@ -81,6 +76,7 @@
                     }
                 })  
             }
+
             function addGroceryRecipe(recipe_id) {
                 console.log("called")
                 
@@ -88,10 +84,41 @@
                     url: "./index.php",
                     method: "GET",
                     data: {
-                        action: "addgrocery",
+                        action: "addgroceryrecipe",
                         recipe_id: recipe_id},
                     success: function(data) {
                         console.log(data)    
+                    }
+                })  
+            }
+            function removeGrocery(article_id) {
+                console.log("called")
+                
+                $.ajax({
+                    url: "./index.php",
+                    method: "GET",
+                    data: {
+                        action: "removegrocery",
+                        article_id: article_id},
+                    success: function(data) {
+                        console.log(data)
+
+                        location.reload()
+                    }
+                })  
+            }
+            function removeGroceryAll() {
+                console.log("called")
+                
+                $.ajax({
+                    url: "./index.php",
+                    method: "GET",
+                    data: {
+                        action: "removegroceryall"},
+                    success: function(data) {
+                        console.log(data)  
+
+                        location.reload();  
                     }
                 })  
             }
@@ -115,7 +142,6 @@
             }
             
 
-        
             let dropdown_hovering = false
 
             $(document).ready( function() {
